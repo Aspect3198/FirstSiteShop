@@ -4,8 +4,6 @@ body{
     background-color: #f4f4f4;
 }
 
-/* HEADER */
-
 header{
     background-color: #222;
     color: white;
@@ -28,14 +26,10 @@ nav a:hover{
     text-decoration: underline;
 }
 
-/* MAIN */
-
 main{
     padding: 30px;
     text-align: center;
 }
-
-/* PRODUCTS */
 
 .products{
     display: flex;
@@ -57,8 +51,6 @@ main{
     border-radius: 5px;
 }
 
-/* BUTTON */
-
 button{
     background-color: #0077ff;
     color: white;
@@ -71,8 +63,6 @@ button{
 button:hover{
     background-color: #0055cc;
 }
-
-/* FOOTER */
 
 footer{
     margin-top: 40px;
