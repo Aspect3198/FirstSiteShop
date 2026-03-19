@@ -2,24 +2,40 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Інтернет-магазин</title>
+    <title>ShopX - Інтернет-магазин</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-    <h1>Інтернет-магазин</h1>
+    <div class="top-bar">
+        <h1 class="logo">ShopX</h1>
 
-    <nav>
-        <a href="#">Головна</a>
-        <a href="#">Каталог</a>
-        <a href="#">Кошик</a>
-        <a href="#">Контакти</a>
-        <a href="#">Увійти</a>
+        <input type="text" placeholder="Пошук товарів..." class="search">
+
+        <div class="user-menu">
+            <a href="#">Увійти</a>
+            <a href="#">Кошик (0)</a>
+        </div>
+    </div>
+
+    <nav class="menu">
+        <a href="#">Смартфони</a>
+        <a href="#">Ноутбуки</a>
+        <a href="#">Аксесуари</a>
+        <a href="#">Побутова техніка</a>
     </nav>
 </header>
 
+<!-- BANNER -->
+<section class="banner">
+    <h2>Знижки до -50% 🔥</h2>
+    <p>Тільки сьогодні на всі гаджети</p>
+</section>
+
+<!-- PRODUCTS -->
 <main>
 
 <h2>Популярні товари</h2>
@@ -27,23 +43,30 @@
 <div class="products">
 
     <div class="product">
-        <img src="https://via.placeholder.com/200" alt="товар">
-        <h3>Смартфон</h3>
-        <p>Ціна: 12000 грн</p>
+        <img src="https://via.placeholder.com/200">
+        <h3>iPhone 14</h3>
+        <p class="price">35000 грн</p>
         <button>Додати в кошик</button>
     </div>
 
     <div class="product">
-        <img src="https://via.placeholder.com/200" alt="товар">
-        <h3>Ноутбук</h3>
-        <p>Ціна: 25000 грн</p>
+        <img src="https://via.placeholder.com/200">
+        <h3>Samsung Galaxy</h3>
+        <p class="price">28000 грн</p>
         <button>Додати в кошик</button>
     </div>
 
     <div class="product">
-        <img src="https://via.placeholder.com/200" alt="товар">
-        <h3>Навушники</h3>
-        <p>Ціна: 2000 грн</p>
+        <img src="https://via.placeholder.com/200">
+        <h3>MacBook Air</h3>
+        <p class="price">45000 грн</p>
+        <button>Додати в кошик</button>
+    </div>
+
+    <div class="product">
+        <img src="https://via.placeholder.com/200">
+        <h3>Навушники Sony</h3>
+        <p class="price">3000 грн</p>
         <button>Додати в кошик</button>
     </div>
 
@@ -51,8 +74,9 @@
 
 </main>
 
+<!-- FOOTER -->
 <footer>
-    <p>© 2026 Інтернет-магазин</p>
+    <p>© 2026 ShopX | Всі права захищені</p>
 </footer>
 
 </body>
