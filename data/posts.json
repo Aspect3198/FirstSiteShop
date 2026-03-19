@@ -1,0 +1,26 @@
+[
+  {
+    "title": "iPhone 14",
+    "price": 35000,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s",
+    "category": "Смартфони"
+  },
+  {
+    "title": "MacBook",
+    "price": 45000,
+    "image": "https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png",
+    "category": "Ноутбуки"
+  },
+  {
+    "title": "Навушники",
+    "price": 2000,
+    "image": "https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg",
+    "category": "Аксесуари"
+  },
+  {
+    "title": "Монітор",
+    "price": 8000,
+    "image": "https://cdn.27.ua/original/b5/1d/8631581_7.jpeg",
+    "category": "Техніка"
+  }
+]

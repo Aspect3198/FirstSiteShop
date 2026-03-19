@@ -2,82 +2,96 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>ShopX - Інтернет-магазин</title>
+    <title>ShopX</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <!-- HEADER -->
-<header>
-    <div class="top-bar">
-        <h1 class="logo">ShopX</h1>
+<header class="header">
 
-        <input type="text" placeholder="Пошук товарів..." class="search">
+    <div class="header-top">
 
-        <div class="user-menu">
-            <a href="#">Увійти</a>
-            <a href="#">Кошик (0)</a>
+        <!-- ЛІВА ЧАСТИНА -->
+        <div class="left">
+            <h1 class="logo">ShopX</h1>
+            <button class="catalog-btn">☰ Каталог</button>
         </div>
+
+        <!-- ПОШУК -->
+        <div class="search-box">
+            <input type="text" placeholder="Я шукаю...">
+            <button>Знайти</button>
+        </div>
+
+        <!-- ПРАВА ЧАСТИНА -->
+        <div class="right">
+            <span>👤</span>
+            <span>❤</span>
+            <span>🛒</span>
+        </div>
+
     </div>
 
-    <nav class="menu">
-        <a href="#">Смартфони</a>
-        <a href="#">Ноутбуки</a>
-        <a href="#">Аксесуари</a>
-        <a href="#">Побутова техніка</a>
-    </nav>
 </header>
 
-<!-- BANNER -->
-<section class="banner">
-    <h2>Знижки до -50% 🔥</h2>
-    <p>Тільки сьогодні на всі гаджети</p>
-</section>
+<div class="container">
 
-<!-- PRODUCTS -->
-<main>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <ul>
+            <li>Ноутбуки та комп’ютери</li>
+            <li>Смартфони</li>
+            <li>Побутова техніка</li>
+            <li>Товари для дому</li>
+            <li>Інструменти</li>
+        </ul>
+    </aside>
 
-<h2>Популярні товари</h2>
+    <!-- MAIN -->
+    <main>
 
-<div class="products">
+        <div class="banner">
+            <h2>🔥 Знижки до -50%</h2>
+        </div>
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>iPhone 14</h3>
-        <p class="price">35000 грн</p>
-        <button>Додати в кошик</button>
-    </div>
+        <h2>Найкращі пропозиції</h2>
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Samsung Galaxy</h3>
-        <p class="price">28000 грн</p>
-        <button>Додати в кошик</button>
-    </div>
+        <div class="products">
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>MacBook Air</h3>
-        <p class="price">45000 грн</p>
-        <button>Додати в кошик</button>
-    </div>
+            <div class="product">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s">
+                <h4>iPhone 14</h4>
+                <p class="price">34999 ₴</p>
+                <button>🛒</button>
+            </div>
 
-    <div class="product">
-        <img src="https://via.placeholder.com/200">
-        <h3>Навушники Sony</h3>
-        <p class="price">3000 грн</p>
-        <button>Додати в кошик</button>
-    </div>
+            <div class="product">
+                <img src="https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png">
+                <h4>MacBook</h4>
+                <p class="price">44999 ₴</p>
+                <button>🛒</button>
+            </div>
+
+            <div class="product">
+                <img src="https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg">
+                <h4>Навушники</h4>
+                <p class="price">2999 ₴</p>
+                <button>🛒</button>
+            </div>
+
+            <div class="product">
+                <img src="https://cdn.27.ua/original/b5/1d/8631581_7.jpeg">
+                <h4>Монітор</h4>
+                <p class="price">29999 ₴</p>
+                <button>🛒</button>
+            </div>
+
+        </div>
+
+    </main>
 
 </div>
-
-</main>
-
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 ShopX | Всі права захищені</p>
-</footer>
 
 </body>
 </html>

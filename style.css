@@ -6,85 +6,136 @@ body{
 
 /* HEADER */
 
-header{
+.header{
     background: #131921;
     color: white;
 }
 
-.top-bar{
+.header-top{
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
 }
 
+/* LEFT */
+
+.left{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .logo{
+    color: #00a046;
     margin: 0;
-    color: orange;
 }
 
-.search{
-    width: 40%;
-    padding: 8px;
-    border-radius: 5px;
+.catalog-btn{
+    background: #00a046;
     border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.user-menu a{
+/* SEARCH */
+
+.search-box{
+    display: flex;
+    width: 40%;
+}
+
+.search-box input{
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-box button{
+    background: #00a046;
     color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+/* RIGHT */
+
+.right{
+    display: flex;
+    align-items: center;
+}
+
+.right span{
     margin-left: 15px;
-    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.user-menu a:hover{
-    text-decoration: underline;
+/* LAYOUT */
+
+.container{
+    display: flex;
 }
 
-/* MENU */
+/* SIDEBAR */
 
-.menu{
-    background: #232f3e;
-    padding: 10px;
-    text-align: center;
+.sidebar{
+    width: 220px;
+    background: white;
+    padding: 15px;
 }
 
-.menu a{
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
+.sidebar ul{
+    list-style: none;
+    padding: 0;
 }
 
-.menu a:hover{
-    color: orange;
+.sidebar li{
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.sidebar li:hover{
+    color: #00a046;
+}
+
+/* MAIN */
+
+main{
+    flex: 1;
+    padding: 20px;
 }
 
 /* BANNER */
 
 .banner{
-    background: linear-gradient(to right, orange, red);
-    color: white;
+    background: white;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
     text-align: center;
-    padding: 40px;
 }
 
 /* PRODUCTS */
 
-main{
-    padding: 20px;
-}
-
 .products{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
 }
 
 .product{
     background: white;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
     text-align: center;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .product:hover{
@@ -93,34 +144,25 @@ main{
 
 .product img{
     width: 100%;
+    border-radius: 5px;
 }
 
 .price{
-    color: green;
+    color: red;
     font-weight: bold;
 }
 
 /* BUTTON */
 
 button{
-    background: orange;
-    border: none;
-    padding: 10px;
+    background: #00a046;
     color: white;
+    border: none;
+    padding: 8px;
     border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover{
-    background: darkorange;
-}
-
-/* FOOTER */
-
-footer{
-    margin-top: 30px;
-    background: #131921;
-    color: white;
-    text-align: center;
-    padding: 15px;
+    background: #008f3a;
 }
