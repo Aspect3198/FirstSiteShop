@@ -4,94 +4,186 @@
     <meta charset="UTF-8">
     <title>ShopX</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css">
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
 
-    <div class="header-top">
+            <div class="left">
+                <h1 class="logo">ShopX</h1>
+                <button class="catalog-btn">☰ Каталог</button>
+            </div>
 
-        <!-- ЛІВА ЧАСТИНА -->
-        <div class="left">
-            <h1 class="logo">ShopX</h1>
-            <button class="catalog-btn">☰ Каталог</button>
+            <div class="search-box">
+                <input type="text" placeholder="Я шукаю...">
+                <button>Знайти</button>
+            </div>
+
+            <div class="right">
+                <button class="auth-btn" onclick="openModal()">Реєстрація</button>
+                <span>🛒</span>
+            </div>
+
         </div>
+    </header>
 
-        <!-- ПОШУК -->
-        <div class="search-box">
-            <input type="text" placeholder="Я шукаю...">
-            <button>Знайти</button>
-        </div>
+    <div class="container">
 
-        <!-- ПРАВА ЧАСТИНА -->
-        <div class="right">
-            <span>👤</span>
-            <span>❤</span>
-            <span>🛒</span>
-        </div>
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <ul>
+                <li>Ноутбуки та комп’ютери</li>
+                <li>Смартфони</li>
+                <li>Побутова техніка</li>
+                <li>Товари для дому</li>
+                <li>Інструменти</li>
+                <li>Телевізори</li>
+                <li>Геймінг</li>
+                <li>Аксесуари</li>
+                <li>Фото та відео</li>
+                <li>Автотовари</li>
+                <li>Спорт і відпочинок</li>
+            </ul>
+        </aside>
 
+        <!-- MAIN -->
+        <main>
+            <div class="banner">
+                <h2>🔥 Знижки до -50%</h2>
+            </div>
+
+            <h2>Найкращі пропозиції</h2>
+
+            <!-- PRODUCTS -->
+            <div class="products">
+
+                <div class="product">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s" alt="iPhone 14">
+                    <h4>iPhone 14</h4>
+                    <p class="price">34999 ₴</p>
+                    <button onclick="addToCart('iPhone 14')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png" alt="MacBook Pro">
+                    <h4>MacBook Pro</h4>
+                    <p class="price">44999 ₴</p>
+                    <button onclick="addToCart('MacBook Pro')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg" alt="Навушники Baseus">
+                    <h4>Навушники Baseus</h4>
+                    <p class="price">2999 ₴</p>
+                    <button onclick="addToCart('Навушники Baseus')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://cdn.27.ua/original/b5/1d/8631581_7.jpeg" alt="Монітор Samsung">
+                    <h4>Монітор Samsung</h4>
+                    <p class="price">29999 ₴</p>
+                    <button onclick="addToCart('Монітор Samsung')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://sota.store/image/cache/catalog/Sony/playstation-5-01-1600x1600.webp" alt="PlayStation 5">
+                    <h4>PlayStation 5</h4>
+                    <p class="price">25999 ₴</p>
+                    <button onclick="addToCart('PlayStation 5')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://content1.rozetka.com.ua/goods/images/big/618204741.webp" alt="Телевізор LG 55”">
+                    <h4>Телевізор LG 55”</h4>
+                    <p class="price">21999 ₴</p>
+                    <button onclick="addToCart('Телевізор LG 55”')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://i.eldorado.ua//goods_images/1676639/80e7f8ed3fa9e9be10be9d54750cb3bf.jpg" alt="Клавіатура RGB">
+                    <h4>Клавіатура RGB</h4>
+                    <p class="price">4999 ₴</p>
+                    <button onclick="addToCart('Клавіатура RGB')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://content1.rozetka.com.ua/goods/images/original/24709323.jpg" alt="Миша Logitech">
+                    <h4>Миша Logitech</h4>
+                    <p class="price">1199 ₴</p>
+                    <button onclick="addToCart('Миша Logitech')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://gopro-ukraine.com/image/cache/catalog/avatarki/hero10/219874917-900x900.jpeg" alt="Камера GoPro Hero 10">
+                    <h4>Камера GoPro Hero 10</h4>
+                    <p class="price">12499 ₴</p>
+                    <button onclick="addToCart('Камера GoPro Hero 10')">🛒</button>
+                </div>
+
+                <div class="product">
+                    <img src="https://f.428.ua/img/4493231/3000/2000/smart-chasy_samsung_sm-r861_galaxy_watch_fe_black_sm-r861nzkasek~2192~2442.jpg" alt="Смарт-годинник Samsung">
+                    <h4>Смарт-годинник Samsung</h4>
+                    <p class="price">7999 ₴</p>
+                    <button onclick="addToCart('Смарт-годинник Samsung')">🛒</button>
+                </div>
+
+            </div>
+        </main>
     </div>
 
-</header>
-
-<div class="container">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <ul>
-            <li>Ноутбуки та комп’ютери</li>
-            <li>Смартфони</li>
-            <li>Побутова техніка</li>
-            <li>Товари для дому</li>
-            <li>Інструменти</li>
-        </ul>
-    </aside>
-
-    <!-- MAIN -->
-    <main>
-
-        <div class="banner">
-            <h2>🔥 Знижки до -50%</h2>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Інформація</h4>
+                <p>Про нас</p>
+                <p>Контакти</p>
+                <p>Вакансії</p>
+            </div>
+            <div class="footer-column">
+                <h4>Допомога</h4>
+                <p>Доставка і оплата</p>
+                <p>Гарантія</p>
+                <p>Повернення товару</p>
+            </div>
+            <div class="footer-column">
+                <h4>Сервіси</h4>
+                <p>Бонуси</p>
+                <p>Подарункові сертифікати</p>
+                <p>Обмін товару</p>
+            </div>
+            <div class="footer-column">
+                <h4>Ми в соцмережах</h4>
+                <p><i class="fi fi-brands-facebook"></i> Facebook</p>
+                <p><i class="fi fi-brands-instagram"></i> Instagram</p>
+                <p><i class="fi fi-brands-youtube"></i> YouTube</p>
+            </div>
         </div>
-
-        <h2>Найкращі пропозиції</h2>
-
-        <div class="products">
-
-            <div class="product">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s">
-                <h4>iPhone 14</h4>
-                <p class="price">34999 ₴</p>
-                <button>🛒</button>
-            </div>
-
-            <div class="product">
-                <img src="https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png">
-                <h4>MacBook</h4>
-                <p class="price">44999 ₴</p>
-                <button>🛒</button>
-            </div>
-
-            <div class="product">
-                <img src="https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg">
-                <h4>Навушники</h4>
-                <p class="price">2999 ₴</p>
-                <button>🛒</button>
-            </div>
-
-            <div class="product">
-                <img src="https://cdn.27.ua/original/b5/1d/8631581_7.jpeg">
-                <h4>Монітор</h4>
-                <p class="price">29999 ₴</p>
-                <button>🛒</button>
-            </div>
-
+        <div class="footer-bottom">
+            <p>© 2026 ShopX — Всі права захищені</p>
         </div>
+    </footer>
 
-    </main>
+    <!-- MODAL -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
 
+        <h2>Реєстрація</h2>
+
+        <input type="text" id="name" placeholder="Ім'я">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Пароль">
+
+        <button onclick="handleSignup()">Зареєструватися</button>
+
+        <p id="message"></p>
+    </div>
 </div>
 
+    <script src="script.js"></script>
 </body>
 </html>

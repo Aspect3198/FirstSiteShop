@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@shopx.com",
+      "password": "1234",
+      "role": "admin",
+      "isAdmin": true
+    },
+    {
+      "id": 2,
+      "name": "Ivan",
+      "email": "ivan@gmail.com",
+      "password": "1111",
+      "role": "user",
+      "isAdmin": false
+    },
+    {
+      "id": 3,
+      "name": "Oksana",
+      "email": "oksana@gmail.com",
+      "password": "2222",
+      "role": "user",
+      "isAdmin": false
+    }
+  ]
+}
