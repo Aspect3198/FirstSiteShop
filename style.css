@@ -80,6 +80,19 @@ body {
     cursor: pointer;
     font-size: 20px;
 }
+.auth-btn {
+    background: none;       /* прибирає фон */
+    border: none;           /* прибирає рамку */
+    color: white;           /* робить текст білим */
+    cursor: pointer;        /* курсор у вигляді руки при наведенні */
+    font-size: 16px;        /* можна змінити розмір тексту */
+    padding: 0;             /* прибирає внутрішні відступи, якщо треба */
+}
+
+/* Додатково можна додати ефект при наведенні */
+.auth-btn:hover {
+    text-decoration: underline; /* наприклад підкреслення при наведенні */
+}
 
 /* LAYOUT */
 .container {
@@ -266,6 +279,8 @@ main {
         font-size: 18px;
     }
 }
+
+
 /* MODAL */
 .modal {
     display: none;
@@ -282,7 +297,7 @@ main {
     background: white;
     padding: 25px;
     width: 300px;
-    border-radius: 10px;
+    border-radius: 20px;
     position: absolute;
     top: 50%;
     left: 50%;

@@ -1,37 +1,62 @@
 [
-    {
-        "title": "iPhone 14",
-        "price": "34999 ₴",
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s"
-    },
-    {
-        "title": "MacBook Pro",
-        "price": "44999 ₴",
-        "image": "https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png"
-    },
-    {
-        "title": "Навушники Baseus",
-        "price": "2999 ₴",
-        "image": "https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg"
-    },
-    {
-        "title": "Монітор Samsung",
-        "price": "29999 ₴",
-        "image": "https://cdn.27.ua/original/b5/1d/8631581_7.jpeg"
-    },
-    {
-        "title": "PlayStation 5",
-        "price": "25999 ₴",
-        "image": "https://content.rozetka.com.ua/goods/images/original/191479325.jpg"
-    },
-    {
-        "title": "Телевізор LG 55”",
-        "price": "21999 ₴",
-        "image": "https://content1.rozetka.com.ua/goods/images/original/302398056.jpg"
-    },
-    {
-        "title": "Клавіатура RGB",
-        "price": "1499 ₴",
-        "image": "https://content2.rozetka.com.ua/goods/images/original/278492345.jpg"
-    }
+  {
+    "title": "iPhone 14",
+    "price": 34999,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Kn28nDxZi5ydvd_F32-iOmklxlOPS8tcDA&s",
+    "category": "Смартфони"
+  },
+  {
+    "title": "MacBook Pro",
+    "price": 44999,
+    "image": "https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-13-2020/space-gray-1.png",
+    "category": "Ноутбуки"
+  },
+  {
+    "title": "Навушники Baseus",
+    "price": 2999,
+    "image": "https://baseusukraine.com.ua/image/cache/catalog/image/catalog/image-url/product1014/image-url-1014-x-600x600.jpg",
+    "category": "Аксесуари"
+  },
+  {
+    "title": "Монітор Samsung",
+    "price": 29999,
+    "image": "https://cdn.27.ua/original/b5/1d/8631581_7.jpeg",
+    "category": "Техніка"
+  },
+  {
+    "title": "PlayStation 5",
+    "price": 25999,
+    "image": "https://sota.store/image/cache/catalog/Sony/playstation-5-01-1600x1600.webp",
+    "category": "Техніка"
+  },
+  {
+    "title": "Телевізор LG 55",
+    "price": 21999,
+    "image": "https://content1.rozetka.com.ua/goods/images/big/618204741.webp",
+    "category": "Техніка"
+  },
+  {
+    "title": "Клавіатура RGB",
+    "price": 4999,
+    "image": "https://i.eldorado.ua/goods_images/1676639/80e7f8ed3fa9e9be10be9d54750cb3bf.jpg",
+    "category": "Аксесуари"
+  },
+  {
+    "title": "Миша Logitech",
+    "price": 1199,
+    "image": "https://content1.rozetka.com.ua/goods/images/original/24709323.jpg",
+    "category": "Аксесуари"
+  },
+  {
+    "title": "GoPro Hero 10",
+    "price": 12499,
+    "image": "https://gopro-ukraine.com/image/cache/catalog/avatarki/hero10/219874917-900x900.jpeg",
+    "category": "Техніка"
+  },
+  {
+    "title": "Смарт-годинник Samsung",
+    "price": 7999,
+    "image": "https://f.428.ua/img/4493231/3000/2000/smart-chasy_samsung_sm-r861_galaxy_watch_fe_black_sm-r861nzkasek~2192~2442.jpg",
+    "category": "Аксесуари"
+  }
 ]
