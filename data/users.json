@@ -1,28 +1,29 @@
-{
-  "users": [
-    {
-      "id": 1,
-      "name": "Admin",
-      "email": "admin@shopx.com",
-      "password": "1234",
-      "role": "admin",
-      "isAdmin": true
-    },
-    {
-      "id": 2,
-      "name": "Ivan",
-      "email": "ivan@gmail.com",
-      "password": "1111",
-      "role": "user",
-      "isAdmin": false
-    },
-    {
-      "id": 3,
-      "name": "Oksana",
-      "email": "oksana@gmail.com",
-      "password": "2222",
-      "role": "user",
-      "isAdmin": false
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "Олексій Коваленко",
+    "email": "alex@example.com",
+    "password": "password123",
+    "avatar": "АК",
+    "joined": "2023-01-15",
+    "orders": 12
+  },
+  {
+    "id": 2,
+    "name": "Марія Іваненко",
+    "email": "maria@example.com",
+    "password": "maria2024",
+    "avatar": "МІ",
+    "joined": "2023-06-20",
+    "orders": 7
+  },
+  {
+    "id": 3,
+    "name": "Дмитро Петренко",
+    "email": "dmytro@example.com",
+    "password": "dmytro123",
+    "avatar": "ДП",
+    "joined": "2024-02-10",
+    "orders": 3
+  }
+]
