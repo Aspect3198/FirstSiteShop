@@ -5,8 +5,10 @@
     "email": "alex@example.com",
     "password": "password123",
     "avatar": "АК",
+    "role": "user",
     "joined": "2023-01-15",
-    "orders": 12
+    "orders": 12,
+    "totalSpent": 48320
   },
   {
     "id": 2,
@@ -14,8 +16,10 @@
     "email": "maria@example.com",
     "password": "maria2024",
     "avatar": "МІ",
+    "role": "user",
     "joined": "2023-06-20",
-    "orders": 7
+    "orders": 7,
+    "totalSpent": 21450
   },
   {
     "id": 3,
@@ -23,7 +27,20 @@
     "email": "dmytro@example.com",
     "password": "dmytro123",
     "avatar": "ДП",
+    "role": "user",
     "joined": "2024-02-10",
-    "orders": 3
+    "orders": 3,
+    "totalSpent": 9870
+  },
+  {
+    "id": 4,
+    "name": "Адміністратор",
+    "email": "admin@market.ua",
+    "password": "admin2024",
+    "avatar": "AD",
+    "role": "admin",
+    "joined": "2021-01-01",
+    "orders": 0,
+    "totalSpent": 0
   }
 ]

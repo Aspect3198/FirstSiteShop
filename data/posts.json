@@ -4,18 +4,28 @@
     "name": "Телевізор TCL 55P7K QLED 4K",
     "category": "tv",
     "brand": "TCL",
-    "price": 20099,
-    "oldPrice": 26999,
+    "price": 46999,
+    "oldPrice": 63399,
     "discount": 26,
     "rating": 4.7,
     "reviews": 342,
-    "image": "https://picsum.photos/seed/tv55/400/400",
-    "images": ["https://picsum.photos/seed/tv55/800/600","https://picsum.photos/seed/tv55b/800/600"],
-    "description": "Телевізор TCL 55P7K з технологією QLED та підтримкою 4K HDR. Частота оновлення 144 Гц, Google TV, підтримка Dolby Atmos та Dolby Vision. Ідеальний для домашнього кінотеатру.",
-    "specs": {"Діагональ": "55\"", "Роздільна здатність": "3840×2160 (4K)", "Частота": "144 Гц", "ОС": "Google TV", "HDR": "Dolby Vision, HDR10+"},
+    "image": "https://content2.rozetka.com.ua/goods/images/big/618135212.jpg",
+    "images": [
+      "https://content2.rozetka.com.ua/goods/images/big/618135212.jpg",
+      "https://content2.rozetka.com.ua/goods/images/big/588753399.jpg"
+    ],
+    "description": "Телевізор TCL 55P7K з технологією QLED та підтримкою 4K HDR. Частота оновлення 144 Гц, Google TV, підтримка Dolby Atmos та Dolby Vision.",
+    "specs": {
+      "Діагональ": "55\"",
+      "Роздільна здатність": "3840×2160 (4K)",
+      "Частота": "144 Гц",
+      "ОС": "Google TV",
+      "HDR": "Dolby Vision, HDR10+"
+    },
     "inStock": true,
     "popular": 95,
-    "tags": ["4K", "QLED", "Google TV", "Dolby"]
+    "tags": ["4K", "QLED", "Google TV"],
+    "badge": ""
   },
   {
     "id": 2,
@@ -27,13 +37,23 @@
     "discount": 13,
     "rating": 4.9,
     "reviews": 1204,
-    "image": "https://picsum.photos/seed/iphone15/400/400",
-    "images": ["https://picsum.photos/seed/iphone15/800/600","https://picsum.photos/seed/iphone15b/800/600"],
-    "description": "iPhone 15 Pro з чіпом A17 Pro, камерою 48 МП з оптичним зумом 5x, титановим корпусом та USB-C з підтримкою USB 3. Перший iPhone з кнопкою Action.",
-    "specs": {"Чіп": "A17 Pro", "Екран": "6.1\" Super Retina XDR", "Камера": "48 МП основна", "Пам'ять": "256 GB", "ОС": "iOS 17"},
+    "image": "https://my-apple.com.ua/image/catalog/products/iphone/iphone-15-pro-15-pro-max/black-titanium-1.png",
+    "images": [
+      "https://my-apple.com.ua/image/catalog/products/iphone/iphone-15-pro-15-pro-max/black-titanium-1.png",
+      "https://skay.ua/220384-thickbox_default/apple-iphone-15-pro-256gb-blue-titanium.jpg"
+    ],
+    "description": "iPhone 15 Pro з чіпом A17 Pro, камерою 48 МП з оптичним зумом 5x, титановим корпусом та USB-C. Перший iPhone з кнопкою Action.",
+    "specs": {
+      "Чіп": "A17 Pro",
+      "Екран": "6.1\" Super Retina XDR",
+      "Камера": "48 МП основна",
+      "Пам'ять": "256 GB",
+      "ОС": "iOS 17"
+    },
     "inStock": true,
     "popular": 99,
-    "tags": ["Apple", "iOS", "5G", "ProMotion"]
+    "tags": ["Apple", "iOS", "5G"],
+    "badge": "top"
   },
   {
     "id": 3,
@@ -45,31 +65,50 @@
     "discount": 17,
     "rating": 4.8,
     "reviews": 876,
-    "image": "https://picsum.photos/seed/s24ultra/400/400",
-    "images": ["https://picsum.photos/seed/s24ultra/800/600"],
-    "description": "Samsung Galaxy S24 Ultra з вбудованим S Pen, камерою 200 МП, чіпом Snapdragon 8 Gen 3 та 12 ГБ оперативної пам'яті. Штучний інтелект для фото та відео.",
-    "specs": {"Чіп": "Snapdragon 8 Gen 3", "Екран": "6.8\" Dynamic AMOLED", "Камера": "200 МП", "Пам'ять": "512 GB", "S Pen": "Так"},
+    "image": "https://my-apple.com.ua/image/catalog/products/Samsung/galaxy-s-24/s-24-black-ultra-2.png",
+    "images": [
+      "https://my-apple.com.ua/image/catalog/products/Samsung/galaxy-s-24/s-24-black-ultra-2.png",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgmRX9wKCSr1nur52DAvbG0HOEx10U_xyl4Q&s"
+    ],
+    "description": "Samsung Galaxy S24 Ultra з вбудованим S Pen, камерою 200 МП, чіпом Snapdragon 8 Gen 3 та 12 ГБ оперативної пам'яті.",
+    "specs": {
+      "Чіп": "Snapdragon 8 Gen 3",
+      "Екран": "6.8\" Dynamic AMOLED",
+      "Камера": "200 МП",
+      "Пам'ять": "512 GB",
+      "S Pen": "Так"
+    },
     "inStock": true,
     "popular": 92,
-    "tags": ["Samsung", "S Pen", "AI", "200MP"]
+    "tags": ["Samsung", "S Pen", "AI"],
+    "badge": ""
   },
   {
     "id": 4,
     "name": "Sony PlayStation 5 Slim 1TB",
     "category": "gaming",
     "brand": "Sony",
-    "price": 23999,
-    "oldPrice": 27999,
+    "price": 35499,
+    "oldPrice": 59999,
     "discount": 14,
     "rating": 4.9,
     "reviews": 2103,
-    "image": "https://picsum.photos/seed/ps5slim/400/400",
-    "images": ["https://picsum.photos/seed/ps5slim/800/600"],
-    "description": "PlayStation 5 Slim — компактніша версія PS5 зі збільшеним накопичувачем 1 ТБ, підтримкою 4K 120fps, технологією DualSense та швидкісним SSD.",
-    "specs": {"Накопичувач": "1 TB SSD", "Графіка": "4K 120fps", "Контролер": "DualSense", "Оптичний привід": "Так"},
+    "image": "https://hotline.ua/img/tx/427/427381728_s265.jpg",
+    "images": [
+      "https://hotline.ua/img/tx/427/427381728_s265.jpg",
+      "https://yabloki.ua/media/cache/sylius_shop_product_original/22/3c/igrova-konsol-playstation-5-slim-digital-edition-30th-anniversary-limited-edition_2e54eb40-702c-454c-9cb4-698d35e2096d-5.png.webp"
+    ],
+    "description": "PlayStation 5 Slim — компактніша версія PS5 зі збільшеним накопичувачем 1 ТБ, підтримкою 4K 120fps та технологією DualSense.",
+    "specs": {
+      "Накопичувач": "1 TB SSD",
+      "Графіка": "4K 120fps",
+      "Контролер": "DualSense",
+      "Оптичний привід": "Так"
+    },
     "inStock": true,
     "popular": 97,
-    "tags": ["PS5", "4K", "DualSense", "Gaming"]
+    "tags": ["PS5", "4K", "DualSense"],
+    "badge": "top"
   },
   {
     "id": 5,
@@ -81,13 +120,22 @@
     "discount": 14,
     "rating": 4.7,
     "reviews": 445,
-    "image": "https://picsum.photos/seed/rogstrix/400/400",
-    "images": ["https://picsum.photos/seed/rogstrix/800/600"],
-    "description": "Ігровий ноутбук ASUS ROG Strix G16 з процесором Intel Core i9-14900HX, відеокартою RTX 4070, 32 ГБ DDR5 та дисплеєм 240 Гц QHD.",
-    "specs": {"Процесор": "Intel i9-14900HX", "Відеокарта": "RTX 4070 8GB", "RAM": "32 GB DDR5", "Дисплей": "16\" QHD 240Hz"},
+    "image": "https://www.ogogo.net.ua/wp-content/uploads/2023/03/ASUS-G16-G614-3.jpg",
+    "images": [
+      "https://www.ogogo.net.ua/wp-content/uploads/2023/03/ASUS-G16-G614-3.jpg",
+      "https://www.ogogo.net.ua/wp-content/uploads/2024/02/G16-G614JZR-8.jpg"
+    ],
+    "description": "Ігровий ноутбук ASUS ROG Strix G16 з Intel Core i9-14900HX, RTX 4070, 32 ГБ DDR5 та дисплеєм 240 Гц QHD.",
+    "specs": {
+      "Процесор": "Intel i9-14900HX",
+      "Відеокарта": "RTX 4070 8GB",
+      "RAM": "32 GB DDR5",
+      "Дисплей": "16\" QHD 240Hz"
+    },
     "inStock": true,
     "popular": 88,
-    "tags": ["RTX 4070", "Gaming", "i9", "240Hz"]
+    "tags": ["RTX 4070", "Gaming"],
+    "badge": ""
   },
   {
     "id": 6,
@@ -99,13 +147,22 @@
     "discount": 10,
     "rating": 4.9,
     "reviews": 678,
-    "image": "https://picsum.photos/seed/macbookpro/400/400",
-    "images": ["https://picsum.photos/seed/macbookpro/800/600"],
-    "description": "MacBook Pro 14\" з чіпом M3 Pro, 18 ГБ уніфікованої пам'яті, дисплеєм Liquid Retina XDR та до 18 годин автономної роботи.",
-    "specs": {"Чіп": "Apple M3 Pro", "RAM": "18 GB", "SSD": "512 GB", "Дисплей": "14.2\" Liquid Retina XDR"},
+    "image": "https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-14-2023/macbook-pro-14-space-gray-late-2023-1.png",
+    "images": [
+      "https://my-apple.com.ua/image/catalog/products/mac/macbook-pro/macbook-pro-14-2023/macbook-pro-14-space-gray-late-2023-1.png",
+      "https://itc.ua/wp-content/uploads/2023/12/obklad-scaled.jpeg"
+    ],
+    "description": "MacBook Pro 14\" з чіпом M3 Pro, 18 ГБ уніфікованої пам'яті, дисплеєм Liquid Retina XDR та до 18 годин роботи.",
+    "specs": {
+      "Чіп": "Apple M3 Pro",
+      "RAM": "18 GB",
+      "SSD": "512 GB",
+      "Дисплей": "14.2\" Liquid Retina XDR"
+    },
     "inStock": true,
     "popular": 91,
-    "tags": ["M3 Pro", "macOS", "ProMotion", "MagSafe"]
+    "tags": ["M3 Pro", "macOS"],
+    "badge": ""
   },
   {
     "id": 7,
@@ -117,13 +174,22 @@
     "discount": 22,
     "rating": 4.8,
     "reviews": 934,
-    "image": "https://picsum.photos/seed/sonywh/400/400",
-    "images": ["https://picsum.photos/seed/sonywh/800/600"],
-    "description": "Флагманські навушники Sony WH-1000XM5 з найкращим шумопоглинанням у класі, підтримкою LDAC і 30 годинами роботи від батареї.",
-    "specs": {"Тип": "Over-ear бездротові", "ANC": "Так", "Час роботи": "30 год", "Кодек": "LDAC, AAC"},
+    "image": "https://yabloki.ua/media/cache/sylius_shop_product_original/77/80/navushniki-sony-wh-1000xm5-silver-wh1000xm5s-ce7_ff48f3d9-4d44-4bcc-bd77-0dfef2ccf4ea-4.png.webp",
+    "images": [
+      "https://yabloki.ua/media/cache/sylius_shop_product_original/77/80/navushniki-sony-wh-1000xm5-silver-wh1000xm5s-ce7_ff48f3d9-4d44-4bcc-bd77-0dfef2ccf4ea-4.png.webp",
+      "https://cdn.tehnoezh.ua/0/0/0/1/3/8/7/6/6/000138766_545_545.webp"
+    ],
+    "description": "Флагманські навушники Sony WH-1000XM5 з найкращим ANC у класі, підтримкою LDAC і 30 годинами роботи.",
+    "specs": {
+      "Тип": "Over-ear бездротові",
+      "ANC": "Так",
+      "Час роботи": "30 год",
+      "Кодек": "LDAC, AAC"
+    },
     "inStock": true,
     "popular": 85,
-    "tags": ["ANC", "LDAC", "Bluetooth", "Hi-Res"]
+    "tags": ["ANC", "LDAC"],
+    "badge": "sale"
   },
   {
     "id": 8,
@@ -135,13 +201,22 @@
     "discount": 18,
     "rating": 4.7,
     "reviews": 1567,
-    "image": "https://picsum.photos/seed/airpodspro/400/400",
-    "images": ["https://picsum.photos/seed/airpodspro/800/600"],
-    "description": "AirPods Pro 2-го покоління з чіпом H2, адаптивним шумопоглинанням, персоналізованим просторовим звуком та підтримкою Lossless Audio через USB-C.",
-    "specs": {"Чіп": "Apple H2", "ANC": "Адаптивний", "Час роботи": "6 год (30 з кейсом)", "З'єднання": "Bluetooth 5.3"},
+    "image": "https://mobileplanet.ua/uploads/product/2023-9-27/apple-airpods-pro-2nd-generation-with-magsafe-char-287824.webp",
+    "images": [
+      "https://mobileplanet.ua/uploads/product/2023-9-27/apple-airpods-pro-2nd-generation-with-magsafe-char-287824.webp",
+      "https://apple-mania.com.ua/media/AP1111.png"
+    ],
+    "description": "AirPods Pro 2-го покоління з чіпом H2, адаптивним ANC та підтримкою Lossless Audio через USB-C.",
+    "specs": {
+      "Чіп": "Apple H2",
+      "ANC": "Адаптивний",
+      "Час роботи": "6 год (30 з кейсом)",
+      "З'єднання": "Bluetooth 5.3"
+    },
     "inStock": true,
     "popular": 89,
-    "tags": ["ANC", "Spatial Audio", "H2", "USB-C"]
+    "tags": ["ANC", "H2"],
+    "badge": ""
   },
   {
     "id": 9,
@@ -153,17 +228,26 @@
     "discount": 21,
     "rating": 4.6,
     "reviews": 523,
-    "image": "https://picsum.photos/seed/dysonv15/400/400",
-    "images": ["https://picsum.photos/seed/dysonv15/800/600"],
-    "description": "Бездротовий пилосос Dyson V15 Detect з лазерним виявленням пилу, датчиком частинок і потужністю 240 AW. До 60 хвилин роботи від акумулятора.",
-    "specs": {"Потужність": "240 AW", "Час роботи": "60 хв", "Ємність контейнера": "0.76 л", "Фільтрація": "HEPA"},
+    "image": "https://bigmag.ua/image/cache/catalog/image/Product/Dyson/Dyson%20V15%20Detect%20Absolute%202023%20YellowNickel/1-2000x2000.jpg",
+    "images": [
+      "https://bigmag.ua/image/cache/catalog/image/Product/Dyson/Dyson%20V15%20Detect%20Absolute%202023%20YellowNickel/1-2000x2000.jpg",
+      "https://appleroom.ua/wa-data/public/shop/products/83/41/14183/images/25598/25598.750.png"
+    ],
+    "description": "Бездротовий пилосос Dyson V15 Detect з лазерним виявленням пилу та HEPA фільтрацією. До 60 хвилин роботи.",
+    "specs": {
+      "Потужність": "240 AW",
+      "Час роботи": "60 хв",
+      "Ємність": "0.76 л",
+      "Фільтрація": "HEPA"
+    },
     "inStock": true,
     "popular": 78,
-    "tags": ["Dyson", "HEPA", "Лазер", "Бездротовий"]
+    "tags": ["HEPA", "Лазер"],
+    "badge": ""
   },
   {
     "id": 10,
-    "name": "Miша A4Tech Bloody W95 Ultra",
+    "name": "Миша A4Tech Bloody W95 Ultra",
     "category": "gaming",
     "brand": "A4Tech",
     "price": 1449,
@@ -171,13 +255,22 @@
     "discount": 27,
     "rating": 4.5,
     "reviews": 1203,
-    "image": "https://picsum.photos/seed/a4tech/400/400",
-    "images": ["https://picsum.photos/seed/a4tech/800/600"],
-    "description": "Ігрова миша A4Tech Bloody W95 Ultra зі швидкістю відстеження 16000 DPI, RGB підсвіткою та 8 програмованими кнопками. Оптичний сенсор з нульовою затримкою.",
-    "specs": {"DPI": "100-16000", "Кнопки": "8 програмованих", "З'єднання": "Дротове USB", "RGB": "Так"},
+    "image": "https://cdnbase.comfy.ua/media/catalog/product/cache/5/image/600x/9df78eab33525d08d6e5fb8d27136e95/w/9/w95_ultra_5_.jpg",
+    "images": [
+      "https://cdnbase.comfy.ua/media/catalog/product/cache/5/image/600x/9df78eab33525d08d6e5fb8d27136e95/w/9/w95_ultra_5_.jpg",
+      "https://kvshop.com.ua/users/products/584/584624/big/501969423.webp"
+    ],
+    "description": "Ігрова миша A4Tech Bloody W95 Ultra зі швидкістю 16000 DPI, RGB підсвіткою та 8 програмованими кнопками.",
+    "specs": {
+      "DPI": "100–16000",
+      "Кнопки": "8 програмованих",
+      "З'єднання": "USB",
+      "RGB": "Так"
+    },
     "inStock": true,
     "popular": 82,
-    "tags": ["RGB", "16000 DPI", "Gaming", "Optical"]
+    "tags": ["RGB", "16000 DPI"],
+    "badge": "sale"
   },
   {
     "id": 11,
@@ -189,13 +282,20 @@
     "discount": 0,
     "rating": 4.4,
     "reviews": 456,
-    "image": "https://picsum.photos/seed/hatorpad/400/400",
-    "images": ["https://picsum.photos/seed/hatorpad/800/600"],
-    "description": "Ігровий килимок для миші Hator Tonn S зі Speed покриттям для максимально швидкого ковзання, гумовою основою і прошитими краями.",
-    "specs": {"Розмір": "360 × 320 мм", "Товщина": "3 мм", "Тип": "Speed", "Основа": "Гумова нековзка"},
+    "image": "https://images.prom.ua/4226536040_w640_h320_igrovoj-kovrik-dlya.jpg",
+    "images": [
+      "https://images.prom.ua/4226536040_w640_h320_igrovoj-kovrik-dlya.jpg"
+    ],
+    "description": "Ігровий килимок Hator Tonn S Speed з прошитими краями та гумовою нековзною основою.",
+    "specs": {
+      "Розмір": "360 × 320 мм",
+      "Товщина": "3 мм",
+      "Тип": "Speed"
+    },
     "inStock": true,
     "popular": 70,
-    "tags": ["Speed", "Gaming", "Mousepad"]
+    "tags": ["Speed", "Gaming"],
+    "badge": ""
   },
   {
     "id": 12,
@@ -207,13 +307,20 @@
     "discount": 23,
     "rating": 4.6,
     "reviews": 789,
-    "image": "https://picsum.photos/seed/nikeair/400/400",
-    "images": ["https://picsum.photos/seed/nikeair/800/600"],
-    "description": "Nike Air Max 270 React з революційним підошвою React, що поглинає удари та забезпечує пружний крок. Велике вікно Air для максимального комфорту.",
-    "specs": {"Підошва": "Air Max + React", "Матеріал верху": "Сітка + синтетика", "Закриття": "Шнурки", "Колір": "Білий/Синій"},
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&auto=format",
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop&auto=format",
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&h=600&fit=crop&auto=format"
+    ],
+    "description": "Nike Air Max 270 React з революційною підошвою React та великим вікном Air для максимального комфорту.",
+    "specs": {
+      "Підошва": "Air Max + React",
+      "Матеріал": "Сітка + синтетика"
+    },
     "inStock": true,
     "popular": 87,
-    "tags": ["Air Max", "React", "Running", "Sneakers"]
+    "tags": ["Air Max", "Running"],
+    "badge": ""
   },
   {
     "id": 13,
@@ -225,13 +332,20 @@
     "discount": 24,
     "rating": 4.5,
     "reviews": 334,
-    "image": "https://picsum.photos/seed/adidashoodie/400/400",
-    "images": ["https://picsum.photos/seed/adidashoodie/800/600"],
-    "description": "Класичне худі Adidas Originals з іконічним логотипом Trefoil, м'якою флісовою підкладкою та регульованим капюшоном. 80% бавовна, 20% поліестер.",
-    "specs": {"Матеріал": "80% бавовна, 20% поліестер", "Капюшон": "Так", "Кишені": "Кенгуру", "Посадка": "Regular"},
+    "image": "https://cdn-images.farfetch-contents.com/12/67/75/21/12677521_12376310_600.jpg",
+    "images": [
+      "https://cdn-images.farfetch-contents.com/12/67/75/21/12677521_12376310_600.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJlouAvKJGruYpZJGCpyNIY8geCTBEpXl-XQ&s"
+    ],
+    "description": "Класичне худі Adidas Originals з логотипом Trefoil та м'якою флісовою підкладкою. 80% бавовна.",
+    "specs": {
+      "Матеріал": "80% бавовна, 20% поліестер",
+      "Посадка": "Regular"
+    },
     "inStock": true,
     "popular": 75,
-    "tags": ["Adidas", "Casual", "Cotton", "Hoodie"]
+    "tags": ["Adidas", "Cotton"],
+    "badge": "sale"
   },
   {
     "id": 14,
@@ -243,13 +357,22 @@
     "discount": 17,
     "rating": 4.8,
     "reviews": 2341,
-    "image": "https://picsum.photos/seed/protein/400/400",
-    "images": ["https://picsum.photos/seed/protein/800/600"],
-    "description": "Сироватковий протеїн Gold Standard від Optimum Nutrition — найпродаваніший протеїн у світі. 24г протеїну на порцію, 5.5г BCAA, смак Double Rich Chocolate.",
-    "specs": {"Протеїн": "24г / порція", "BCAA": "5.5г", "Порцій": "74", "Смак": "Double Rich Chocolate"},
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7owVYxOFh452KbVMhB2eFO7U6gVb-OFo1Xw&s",
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7owVYxOFh452KbVMhB2eFO7U6gVb-OFo1Xw&s",
+      "https://content.rozetka.com.ua/goods/images/big/409996642.jpg"
+    ],
+    "description": "Сироватковий протеїн Gold Standard — найпродаваніший у світі. 24г протеїну на порцію, 5.5г BCAA.",
+    "specs": {
+      "Протеїн": "24г / порція",
+      "BCAA": "5.5г",
+      "Порцій": "74",
+      "Смак": "Double Rich Chocolate"
+    },
     "inStock": true,
     "popular": 93,
-    "tags": ["Whey", "BCAA", "Post-workout", "ON"]
+    "tags": ["Whey", "BCAA"],
+    "badge": "top"
   },
   {
     "id": 15,
@@ -261,17 +384,25 @@
     "discount": 28,
     "rating": 4.4,
     "reviews": 567,
-    "image": "https://picsum.photos/seed/yogamat/400/400",
-    "images": ["https://picsum.photos/seed/yogamat/800/600"],
-    "description": "Килимок для йоги та фітнесу Adidas зі спеціальним ковзкостійким покриттям, товщиною 6 мм для комфортних тренувань та вбудованим ременем для транспортування.",
-    "specs": {"Товщина": "6 мм", "Розмір": "173 × 61 см", "Матеріал": "NBR", "Вага": "650 г"},
+    "image": "https://interatletika.com.ua/upload/iblock/7d8/mat_dlya_yogi_adidas_adyg_10400rg.jpg",
+    "images": [
+      "https://interatletika.com.ua/upload/iblock/7d8/mat_dlya_yogi_adidas_adyg_10400rg.jpg",
+      "https://i.terrasport.ua/2018/10_14/16_08/u_files_store_15_2423358.jpg"
+    ],
+    "description": "Килимок для йоги Adidas товщиною 6 мм з ковзкостійким покриттям та ременем для транспортування.",
+    "specs": {
+      "Товщина": "6 мм",
+      "Розмір": "173 × 61 см",
+      "Матеріал": "NBR"
+    },
     "inStock": true,
     "popular": 68,
-    "tags": ["Yoga", "Fitness", "NBR", "NonSlip"]
+    "tags": ["Yoga", "Fitness"],
+    "badge": ""
   },
   {
     "id": 16,
-    "name": "Механічна клавіатура HyperX Alloy Origins 65",
+    "name": "Клавіатура HyperX Alloy Origins 65",
     "category": "computers",
     "brand": "HyperX",
     "price": 3999,
@@ -279,13 +410,22 @@
     "discount": 25,
     "rating": 4.7,
     "reviews": 723,
-    "image": "https://picsum.photos/seed/hyperxkb/400/400",
-    "images": ["https://picsum.photos/seed/hyperxkb/800/600"],
-    "description": "Компактна механічна клавіатура HyperX Alloy Origins 65 з перемикачами HyperX Red, RGB підсвіткою та алюмінієвим корпусом. Детачебл USB-C кабель.",
-    "specs": {"Перемикачі": "HyperX Red Linear", "Розкладка": "65% (67 клавіш)", "Підсвітка": "RGB per-key", "З'єднання": "USB-C"},
+    "image": "https://files.foxtrot.com.ua/PhotoNew/1_638118300410780321.jpg",
+    "images": [
+      "https://files.foxtrot.com.ua/PhotoNew/1_638118300410780321.jpg",
+      "https://i.moyo.ua/img/gallery/6534/22/2993159_zoom.jpg"
+    ],
+    "description": "Компактна механічна клавіатура HyperX Alloy Origins 65 з перемикачами Red, RGB та алюмінієвим корпусом.",
+    "specs": {
+      "Перемикачі": "HyperX Red Linear",
+      "Розкладка": "65%",
+      "Підсвітка": "RGB per-key",
+      "З'єднання": "USB-C"
+    },
     "inStock": true,
     "popular": 80,
-    "tags": ["Mechanical", "RGB", "65%", "HyperX Red"]
+    "tags": ["Mechanical", "RGB"],
+    "badge": ""
   },
   {
     "id": 17,
@@ -297,13 +437,22 @@
     "discount": 14,
     "rating": 4.6,
     "reviews": 234,
-    "image": "https://picsum.photos/seed/chocolate/400/400",
-    "images": ["https://picsum.photos/seed/chocolate/800/600"],
-    "description": "Чорний шоколад Spell без цукру на основі какао-бобів преміум класу з острова Ява. Без глютену, без молока, веганський. Ідеально для кето-дієти.",
-    "specs": {"Какао": "85%", "Вага": "85 г", "Цукор": "Без цукру", "Сертифікат": "Vegan, Gluten-free"},
+    "image": "https://lorashen.ua/static/media/uploads/product/sweets/.thumbnails/1-0x700__5_.jpg/1-0x700__5_-0x600.jpg",
+    "images": [
+      "https://lorashen.ua/static/media/uploads/product/sweets/.thumbnails/1-0x700__5_.jpg/1-0x700__5_-0x600.jpg",
+      "https://spellchocolate.com/image/cache/catalog/avatars/573-400x400.jpg"
+    ],
+    "description": "Чорний шоколад Spell 85% без цукру. Без глютену, без молока, веганський. Ідеально для кето-дієти.",
+    "specs": {
+      "Какао": "85%",
+      "Вага": "85 г",
+      "Цукор": "Без цукру",
+      "Сертифікат": "Vegan, Gluten-free"
+    },
     "inStock": true,
     "popular": 65,
-    "tags": ["Dark", "Sugar-free", "Vegan", "Keto"]
+    "tags": ["Dark", "Vegan"],
+    "badge": "new"
   },
   {
     "id": 18,
@@ -315,17 +464,26 @@
     "discount": 48,
     "rating": 4.7,
     "reviews": 892,
-    "image": "https://picsum.photos/seed/oliveoil/400/400",
-    "images": ["https://picsum.photos/seed/oliveoil/800/600"],
-    "description": "Оливкова олія Borges Extra Light для смаження та випічки. Вироблена в Іспанії з відбірних оливок, з ніжним смаком та світлим кольором.",
-    "specs": {"Об'єм": "1 л", "Тип": "Extra Light", "Країна": "Іспанія", "Кислотність": "< 0.3%"},
+    "image": "https://img2.zakaz.ua/ec90db2617bc46caad8d85e7509269f8/1747247132-s1350x1350.jpg",
+    "images": [
+      "https://img2.zakaz.ua/ec90db2617bc46caad8d85e7509269f8/1747247132-s1350x1350.jpg",
+      "https://images.silpo.ua/v2/products/500x500/origin/14c21149-21c5-491a-83b9-8c15d4d5fff4.png"
+    ],
+    "description": "Оливкова олія Borges Extra Light для смаження та випічки. Вироблена в Іспанії з відбірних оливок.",
+    "specs": {
+      "Об'єм": "1 л",
+      "Тип": "Extra Light",
+      "Країна": "Іспанія",
+      "Кислотність": "< 0.3%"
+    },
     "inStock": true,
     "popular": 72,
-    "tags": ["Extra Light", "Spain", "Frying", "Borges"]
+    "tags": ["Extra Light", "Spain"],
+    "badge": "sale"
   },
   {
     "id": 19,
-    "name": "Крем для обличчя La Roche-Posay Effaclar",
+    "name": "Крем La Roche-Posay Effaclar 40мл",
     "category": "beauty",
     "brand": "La Roche-Posay",
     "price": 899,
@@ -333,13 +491,21 @@
     "discount": 25,
     "rating": 4.8,
     "reviews": 1456,
-    "image": "https://picsum.photos/seed/larocheposay/400/400",
-    "images": ["https://picsum.photos/seed/larocheposay/800/600"],
-    "description": "Крем-гель La Roche-Posay Effaclar для жирної та проблемної шкіри. Матуючий ефект, зменшує розширені пори, контролює виділення шкірного сала 24 години.",
-    "specs": {"Тип шкіри": "Жирна, комбінована", "Об'єм": "40 мл", "SPF": "Без SPF", "Тестовано": "Дерматологічно"},
+    "image": "https://pwa-api.eva.ua/img/512/512/resize/7/0/707634_1_1731080436.jpg",
+    "images": [
+      "https://pwa-api.eva.ua/img/512/512/resize/7/0/707634_1_1731080436.jpg",
+      "https://www.add.ua/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/3/3/3337875920742-288274-big-1500x1500-f287_jpg.webp"
+    ],
+    "description": "Крем-гель для жирної та проблемної шкіри. Матуючий ефект, зменшує пори, контролює сало 24 години.",
+    "specs": {
+      "Тип шкіри": "Жирна, комбінована",
+      "Об'єм": "40 мл",
+      "Тестовано": "Дерматологічно"
+    },
     "inStock": true,
     "popular": 86,
-    "tags": ["Acne", "Mattifying", "Oil-free", "Dermatological"]
+    "tags": ["Acne", "Mattifying"],
+    "badge": ""
   },
   {
     "id": 20,
@@ -351,12 +517,21 @@
     "discount": 19,
     "rating": 4.9,
     "reviews": 345,
-    "image": "https://picsum.photos/seed/chaneln5/400/400",
-    "images": ["https://picsum.photos/seed/chaneln5/800/600"],
-    "description": "Подарунковий набір Chanel N°5 EDP 100мл + міні-версія 7.5мл + лосьйон для тіла 100мл. Іконічний аромат з нотами альдегідів, троянди та сандалу.",
-    "specs": {"Концентрація": "Eau de Parfum", "Об'єм": "100 мл + подарунки", "Аромат": "Квітково-альдегідний", "Стать": "Жіночий"},
+    "image": "https://image-thumbs.shafastatic.net/2229689523_310_430",
+    "images": [
+      "https://image-thumbs.shafastatic.net/2229689523_310_430",
+      "https://image-thumbs.shafastatic.net/2225630650_310_430"
+    ],
+    "description": "Подарунковий набір Chanel N°5 EDP 100мл + міні 7.5мл + лосьйон 100мл. Іконічний квітково-альдегідний аромат.",
+    "specs": {
+      "Концентрація": "Eau de Parfum",
+      "Об'єм": "100 мл + подарунки",
+      "Аромат": "Квітково-альдегідний",
+      "Стать": "Жіночий"
+    },
     "inStock": true,
     "popular": 90,
-    "tags": ["EDP", "Gift Set", "Iconic", "Floral"]
+    "tags": ["EDP", "Gift Set"],
+    "badge": "top"
   }
 ]

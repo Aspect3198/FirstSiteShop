@@ -3,31 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>МАРКЕТ — Інтернет-магазин</title>
+  <title>WONDERMARKET — Інтернет-магазин</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ========== HEADER ========== -->
-  <header class="header" id="header">
-    <div class="header-inner">
-      <button class="burger-btn" id="burgerBtn" aria-label="Меню">
-        <span></span><span></span><span></span>
-      </button>
+<header class="header" id="header">
+  <div class="header-inner">
+    <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
 
-      <a href="#" class="logo" aria-label="Головна">
-        <svg class="logo-icon" viewBox="0 0 36 36" fill="none">
-          <rect width="36" height="36" rx="8" fill="var(--accent)"/>
-          <path d="M8 10h20M8 18h20M8 26h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="27" cy="26" r="4" fill="#fff"/>
-        </svg>
-        <span class="logo-text">WONDERMARKET</span>
-      </a>
+    <a href="#" class="logo" onclick="resetAll();return false;">
+      <svg class="logo-icon" viewBox="0 0 32 32" fill="none" width="30" height="30">
+        <rect width="32" height="32" rx="7" fill="var(--accent)"/>
+        <path d="M7 9h18M7 16h18M7 23h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="24" cy="23" r="3.5" fill="#fff"/>
+      </svg>
+      <span class="logo-text">WONDER<span class="logo-accent">MARKET</span></span>
+    </a>
 
+    <div class="header-right">
       <button class="catalog-toggle-btn" id="catalogToggleBtn">
-        <svg width="18" height="14" viewBox="0 0 18 14" fill="currentColor">
+        <svg width="16" height="13" viewBox="0 0 18 14" fill="currentColor">
           <rect y="0" width="18" height="2.5" rx="1.25"/>
           <rect y="5.75" width="13" height="2.5" rx="1.25"/>
           <rect y="11.5" width="8" height="2.5" rx="1.25"/>
@@ -36,8 +36,8 @@
       </button>
 
       <div class="search-wrap" id="searchWrap">
-        <input type="text" id="searchInput" class="search-input" placeholder="Я шукаю..." autocomplete="off" aria-label="Пошук">
-        <button class="search-submit" id="searchSubmit" aria-label="Знайти">
+        <input type="text" id="searchInput" class="search-input" placeholder="Я шукаю..." autocomplete="off">
+        <button class="search-submit" id="searchSubmit">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
@@ -46,19 +46,28 @@
       </div>
 
       <div class="header-actions">
-        <button class="hdr-btn" id="authBtn" aria-label="Профіль">
+        <button class="hdr-btn admin-hdr-btn hidden" id="adminPanelBtn" title="Адмін-панель">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="hdr-btn-label">Адмін</span>
+        </button>
+
+        <button class="hdr-btn" id="authBtn">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
           </svg>
           <span class="hdr-btn-label" id="authLabel">Увійти</span>
         </button>
-        <button class="hdr-btn has-badge" id="favoritesBtn" aria-label="Обране">
+
+        <button class="hdr-btn has-badge" id="favoritesBtn" title="Обране">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
           <span class="badge" id="favCount">0</span>
         </button>
-        <button class="hdr-btn has-badge cart-hdr-btn" id="cartBtn" aria-label="Кошик">
+
+        <button class="hdr-btn has-badge" id="cartBtn" title="Кошик">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
@@ -67,409 +76,399 @@
         </button>
       </div>
     </div>
-
-    <!-- Catalog Megamenu -->
-    <div class="catalog-mega" id="catalogMega">
-      <div class="catalog-mega-inner">
-        <ul class="catalog-cats" id="catalogCats"></ul>
-      </div>
-    </div>
-  </header>
-
-  <!-- ========== OVERLAY ========== -->
-  <div class="overlay" id="overlay"></div>
-
-  <!-- ========== MAIN LAYOUT ========== -->
-  <div class="page-layout">
-
-    <!-- ===== SIDEBAR ===== -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Категорії</h3>
-        <ul class="cat-list" id="catList"></ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Ціна, ₴</h3>
-        <div class="price-range-wrap">
-          <div class="price-inputs">
-            <input type="number" id="priceMin" placeholder="від" min="0">
-            <span>—</span>
-            <input type="number" id="priceMax" placeholder="до" max="200000">
-          </div>
-          <div class="range-track">
-            <div class="range-fill" id="rangeFill"></div>
-            <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
-            <input type="range" id="rangeMax" min="0" max="100000" value="100000" step="100">
-          </div>
-        </div>
-      </div>
-
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Бренд</h3>
-        <div class="brand-list" id="brandList"></div>
-      </div>
-
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Рейтинг</h3>
-        <div class="rating-filters" id="ratingFilters"></div>
-      </div>
-
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">Наявність</h3>
-        <label class="checkbox-label">
-          <input type="checkbox" id="inStockOnly">
-          <span class="checkmark"></span>
-          Є в наявності
-        </label>
-        <label class="checkbox-label">
-          <input type="checkbox" id="discountOnly">
-          <span class="checkmark"></span>
-          Тільки зі знижкою
-        </label>
-      </div>
-
-      <div class="sidebar-actions">
-        <button class="btn-apply" id="applyFilters">Застосувати</button>
-        <button class="btn-reset" id="resetFilters">Скинути</button>
-      </div>
-    </aside>
-
-    <!-- ===== MAIN CONTENT ===== -->
-    <main class="main-content" id="mainContent">
-
-      <!-- Hero Banner Slider -->
-      <section class="hero-slider" id="heroSlider">
-        <div class="slides-track" id="slidesTrack">
-          <div class="slide slide-1">
-            <div class="slide-text">
-              <p class="slide-tag">Весняний розпродаж</p>
-              <h2>До -40% на<br>електроніку</h2>
-              <p>Знижки на топові бренди</p>
-              <button class="slide-cta" onclick="filterByCategory('tv')">Дивитися</button>
-            </div>
-            <div class="slide-decor">
-              <div class="slide-circle c1"></div>
-              <div class="slide-circle c2"></div>
-              <div class="slide-circle c3"></div>
-            </div>
-          </div>
-          <div class="slide slide-2">
-            <div class="slide-text">
-              <p class="slide-tag">Новинки</p>
-              <h2>iPhone 15 Pro<br>вже тут</h2>
-              <p>Титановий корпус. Chip A17 Pro.</p>
-              <button class="slide-cta" onclick="filterByCategory('smartphones')">Купити</button>
-            </div>
-            <div class="slide-decor">
-              <div class="slide-circle c1"></div>
-              <div class="slide-circle c2"></div>
-              <div class="slide-circle c3"></div>
-            </div>
-          </div>
-          <div class="slide slide-3">
-            <div class="slide-text">
-              <p class="slide-tag">Ігровий сезон</p>
-              <h2>PlayStation 5<br>в наявності</h2>
-              <p>Найкращі ігрові пристрої</p>
-              <button class="slide-cta" onclick="filterByCategory('gaming')">До ігор</button>
-            </div>
-            <div class="slide-decor">
-              <div class="slide-circle c1"></div>
-              <div class="slide-circle c2"></div>
-              <div class="slide-circle c3"></div>
-            </div>
-          </div>
-          <div class="slide slide-4">
-            <div class="slide-text">
-              <p class="slide-tag">Smart-підписка</p>
-              <h2>Безкоштовна<br>доставка</h2>
-              <p>Від 2 товарів — знижка 20%</p>
-              <button class="slide-cta" onclick="filterByCategory('computers')">Обрати</button>
-            </div>
-            <div class="slide-decor">
-              <div class="slide-circle c1"></div>
-              <div class="slide-circle c2"></div>
-              <div class="slide-circle c3"></div>
-            </div>
-          </div>
-        </div>
-        <button class="slider-arrow arrow-prev" id="sliderPrev" aria-label="Попередній">
-          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 1 1 9 9 17"/>
-          </svg>
-        </button>
-        <button class="slider-arrow arrow-next" id="sliderNext" aria-label="Наступний">
-          <svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="1 1 9 9 1 17"/>
-          </svg>
-        </button>
-        <div class="slider-dots" id="sliderDots"></div>
-      </section>
-
-      <!-- Controls Bar -->
-      <div class="controls-bar">
-        <div class="results-info" id="resultsInfo">Завантаження...</div>
-        <div class="controls-right">
-          <label class="sort-label" for="sortSelect">Сортування:</label>
-          <select id="sortSelect" class="sort-select">
-            <option value="popular">Популярні</option>
-            <option value="price-asc">Ціна ↑</option>
-            <option value="price-desc">Ціна ↓</option>
-            <option value="rating">Рейтинг</option>
-            <option value="discount">Знижка</option>
-            <option value="newest">Новинки</option>
-          </select>
-          <div class="view-btns">
-            <button class="view-btn active" id="gridViewBtn" aria-label="Сітка" title="Сітка">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="0" y="0" width="6.5" height="6.5" rx="1.5"/>
-                <rect x="9.5" y="0" width="6.5" height="6.5" rx="1.5"/>
-                <rect x="0" y="9.5" width="6.5" height="6.5" rx="1.5"/>
-                <rect x="9.5" y="9.5" width="6.5" height="6.5" rx="1.5"/>
-              </svg>
-            </button>
-            <button class="view-btn" id="listViewBtn" aria-label="Список" title="Список">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect y="0" width="16" height="3.5" rx="1.75"/>
-                <rect y="6.25" width="16" height="3.5" rx="1.75"/>
-                <rect y="12.5" width="16" height="3.5" rx="1.75"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active Filters Tags -->
-      <div class="active-filters" id="activeFilters"></div>
-
-      <!-- Product Grid -->
-      <div class="product-grid" id="productGrid"></div>
-
-      <!-- Empty State -->
-      <div class="empty-state hidden" id="emptyState">
-        <div class="empty-icon">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-            <circle cx="40" cy="40" r="39" stroke="var(--border)" stroke-width="2"/>
-            <circle cx="34" cy="34" r="16" stroke="var(--text-muted)" stroke-width="2.5"/>
-            <line x1="45.6" y1="45.6" x2="58" y2="58" stroke="var(--text-muted)" stroke-width="2.5" stroke-linecap="round"/>
-            <line x1="28" y1="34" x2="40" y2="34" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"/>
-            <line x1="34" y1="28" x2="34" y2="40" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Нічого не знайдено</h3>
-        <p>Спробуйте змінити параметри пошуку або скинути фільтри</p>
-        <button class="btn-apply" onclick="resetAll()">Скинути фільтри</button>
-      </div>
-
-      <!-- Load More -->
-      <div class="load-more-wrap" id="loadMoreWrap">
-        <button class="load-more-btn" id="loadMoreBtn">
-          Завантажити більше
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </button>
-      </div>
-    </main>
   </div>
 
-  <!-- ========== CART SIDEBAR ========== -->
-  <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-label="Кошик">
-    <div class="cart-header">
-      <h2>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
-        Кошик
-      </h2>
-      <button class="close-btn" id="closeCartBtn" aria-label="Закрити">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="cart-body" id="cartBody">
-      <div class="cart-items" id="cartItems"></div>
-      <div class="cart-empty-msg hidden" id="cartEmptyMsg">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-        </svg>
-        <p>Кошик порожній</p>
-        <span>Додайте товари, щоб продовжити</span>
-      </div>
-    </div>
-
-    <div class="cart-footer" id="cartFooter">
-      <div class="cart-summary">
-        <div class="cart-summary-row">
-          <span>Товарів: <span id="cartItemsCount">0</span></span>
-          <span>Знижка: <span id="cartDiscount" class="discount-val">-0 ₴</span></span>
-        </div>
-        <div class="cart-total-row">
-          <span>Разом</span>
-          <span class="cart-total-price" id="cartTotalPrice">0 ₴</span>
-        </div>
-      </div>
-      <button class="checkout-btn" id="checkoutBtn">
-        Оформити замовлення
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </button>
-      <button class="clear-cart-btn" id="clearCartBtn">Очистити кошик</button>
+  <div class="catalog-mega" id="catalogMega">
+    <div class="catalog-mega-inner">
+      <ul class="catalog-cats" id="catalogCats"></ul>
     </div>
   </div>
+</header>
 
-  <!-- ========== PRODUCT MODAL ========== -->
-  <div class="modal-backdrop" id="modalBackdrop"></div>
-  <div class="product-modal" id="productModal" role="dialog" aria-modal="true">
-    <button class="close-btn modal-close-btn" id="modalCloseBtn" aria-label="Закрити">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
+<div class="overlay" id="overlay"></div>
+
+<div class="page-layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Категорії</h3>
+      <ul class="cat-list" id="catList"></ul>
+    </div>
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Ціна, ₴</h3>
+      <div class="price-inputs">
+        <input type="number" id="priceMin" placeholder="від" min="0">
+        <span>—</span>
+        <input type="number" id="priceMax" placeholder="до" max="200000">
+      </div>
+      <div class="range-track">
+        <div class="range-fill" id="rangeFill"></div>
+        <input type="range" id="rangeMin" min="0" max="100000" value="0" step="100">
+        <input type="range" id="rangeMax" min="0" max="100000" value="100000" step="100">
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Бренд</h3>
+      <div class="brand-list" id="brandList"></div>
+    </div>
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Рейтинг</h3>
+      <div class="rating-filters" id="ratingFilters"></div>
+    </div>
+    <div class="sidebar-section">
+      <h3 class="sidebar-title">Наявність</h3>
+      <label class="checkbox-label">
+        <input type="checkbox" id="inStockOnly"><span class="checkmark"></span>Є в наявності
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="discountOnly"><span class="checkmark"></span>Тільки зі знижкою
+      </label>
+    </div>
+    <div class="sidebar-actions">
+      <button class="btn-apply" id="applyFilters">Застосувати</button>
+      <button class="btn-reset" id="resetFilters">Скинути</button>
+    </div>
+  </aside>
+
+  <main class="main-content" id="mainContent">
+    <section class="hero-slider" id="heroSlider">
+      <div class="slides-track" id="slidesTrack">
+        <div class="slide slide-1">
+          <div class="slide-text">
+            <p class="slide-tag">Весняний розпродаж</p>
+            <h2>До -40% на<br>електроніку</h2>
+            <p>Знижки на топові бренди</p>
+            <button class="slide-cta" onclick="filterByCategory('tv')">Дивитися</button>
+          </div>
+          <div class="slide-decor"><div class="slide-circle c1"></div><div class="slide-circle c2"></div><div class="slide-circle c3"></div></div>
+        </div>
+        <div class="slide slide-2">
+          <div class="slide-text">
+            <p class="slide-tag">Новинки</p>
+            <h2>iPhone 15 Pro<br>вже тут</h2>
+            <p>Титановий корпус. Chip A17 Pro.</p>
+            <button class="slide-cta" onclick="filterByCategory('smartphones')">Купити</button>
+          </div>
+          <div class="slide-decor"><div class="slide-circle c1"></div><div class="slide-circle c2"></div><div class="slide-circle c3"></div></div>
+        </div>
+        <div class="slide slide-3">
+          <div class="slide-text">
+            <p class="slide-tag">Ігровий сезон</p>
+            <h2>PlayStation 5<br>в наявності</h2>
+            <p>Найкращі ігрові пристрої</p>
+            <button class="slide-cta" onclick="filterByCategory('gaming')">До ігор</button>
+          </div>
+          <div class="slide-decor"><div class="slide-circle c1"></div><div class="slide-circle c2"></div><div class="slide-circle c3"></div></div>
+        </div>
+        <div class="slide slide-4">
+          <div class="slide-text">
+            <p class="slide-tag">Smart-підписка</p>
+            <h2>Безкоштовна<br>доставка</h2>
+            <p>Від 2 товарів — знижка 20%</p>
+            <button class="slide-cta" onclick="filterByCategory('computers')">Обрати</button>
+          </div>
+          <div class="slide-decor"><div class="slide-circle c1"></div><div class="slide-circle c2"></div><div class="slide-circle c3"></div></div>
+        </div>
+      </div>
+      <button class="slider-arrow arrow-prev" id="sliderPrev"><svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 1 1 9 9 17"/></svg></button>
+      <button class="slider-arrow arrow-next" id="sliderNext"><svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="1 1 9 9 1 17"/></svg></button>
+      <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <div class="controls-bar">
+      <div class="results-info" id="resultsInfo">Завантаження...</div>
+      <div class="controls-right">
+        <label class="sort-label" for="sortSelect">Сортування:</label>
+        <select id="sortSelect" class="sort-select">
+          <option value="popular">Популярні</option>
+          <option value="price-asc">Ціна ↑</option>
+          <option value="price-desc">Ціна ↓</option>
+          <option value="rating">Рейтинг</option>
+          <option value="discount">Знижка</option>
+          <option value="newest">Новинки</option>
+        </select>
+        <div class="view-btns">
+          <button class="view-btn active" id="gridViewBtn" title="Сітка">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="0" y="0" width="6.5" height="6.5" rx="1.5"/><rect x="9.5" y="0" width="6.5" height="6.5" rx="1.5"/><rect x="0" y="9.5" width="6.5" height="6.5" rx="1.5"/><rect x="9.5" y="9.5" width="6.5" height="6.5" rx="1.5"/></svg>
+          </button>
+          <button class="view-btn" id="listViewBtn" title="Список">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect y="0" width="16" height="3.5" rx="1.75"/><rect y="6.25" width="16" height="3.5" rx="1.75"/><rect y="12.5" width="16" height="3.5" rx="1.75"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="active-filters" id="activeFilters"></div>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="39" stroke="var(--border)" stroke-width="2"/><circle cx="34" cy="34" r="16" stroke="var(--text-muted)" stroke-width="2.5"/><line x1="45.6" y1="45.6" x2="58" y2="58" stroke="var(--text-muted)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <h3>Нічого не знайдено</h3>
+      <p>Спробуйте змінити параметри пошуку або скинути фільтри</p>
+      <button class="btn-apply" onclick="resetAll()">Скинути фільтри</button>
+    </div>
+
+    <div class="load-more-wrap" id="loadMoreWrap">
+      <button class="load-more-btn hidden" id="loadMoreBtn">
+        Завантажити більше
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+  </main>
+</div>
+
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Кошик</h2>
+    <button class="close-btn" id="closeCartBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="cart-body">
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty-msg hidden" id="cartEmptyMsg">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <p>Кошик порожній</p><span>Додайте товари, щоб продовжити</span>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span>Товарів: <span id="cartItemsCount">0</span></span>
+        <span>Знижка: <span id="cartDiscount" class="discount-val">-0 ₴</span></span>
+      </div>
+      <div class="cart-total-row">
+        <span>Разом</span>
+        <span class="cart-total-price" id="cartTotalPrice">0 ₴</span>
+      </div>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">
+      Оформити замовлення
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
-    <div class="modal-body" id="modalBody"></div>
+    <button class="clear-cart-btn" id="clearCartBtn">Очистити кошик</button>
   </div>
+</div>
 
-  <!-- ========== AUTH MODAL ========== -->
-  <div class="auth-modal" id="authModal" role="dialog" aria-modal="true">
-    <div class="auth-card">
-      <button class="close-btn auth-close-btn" id="authCloseBtn" aria-label="Закрити">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
+<div class="modal-backdrop" id="modalBackdrop"></div>
+<div class="product-modal" id="productModal">
+  <button class="close-btn modal-close-btn" id="modalCloseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-body" id="modalBody"></div>
+</div>
 
-      <div class="auth-logo">
-        <svg viewBox="0 0 36 36" fill="none" width="40" height="40">
-          <rect width="36" height="36" rx="8" fill="var(--accent)"/>
-          <path d="M8 10h20M8 18h20M8 26h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="27" cy="26" r="4" fill="#fff"/>
-        </svg>
-        <span>WONDERMARKET</span>
+<div class="auth-modal" id="authModal">
+  <div class="auth-card">
+    <button class="close-btn auth-close-btn" id="authCloseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+
+    <div class="auth-logo">
+      <svg viewBox="0 0 32 32" fill="none" width="34" height="34"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M7 9h18M7 16h18M7 23h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="23" r="3.5" fill="#fff"/></svg>
+      <span>WONDER<span class="logo-accent">MARKET</span></span>
+    </div>
+
+    <div class="auth-tabs" id="authTabs">
+      <button class="auth-tab active" data-tab="login" id="loginTabBtn">Увійти</button>
+      <button class="auth-tab" data-tab="register" id="registerTabBtn">Реєстрація</button>
+    </div>
+
+    <div class="auth-panel active" id="loginPanel">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email">
       </div>
-
-      <div class="auth-tabs">
-        <button class="auth-tab active" data-tab="login" id="loginTabBtn">Увійти</button>
-        <button class="auth-tab" data-tab="register" id="registerTabBtn">Реєстрація</button>
-      </div>
-
-      <div class="auth-panel active" id="loginPanel">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="loginEmail" placeholder="your@email.com" autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label>Пароль</label>
+      <div class="form-group">
+        <label>Пароль</label>
+        <div class="input-eye-wrap">
           <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="eye-btn" onclick="togglePwd('loginPassword',this)">👁</button>
         </div>
-        <div class="auth-hint">Демо: alex@example.com / password123</div>
-        <button class="auth-submit-btn" id="loginSubmitBtn">Увійти</button>
       </div>
+      <div class="auth-hint">
+        Покупець: <strong>alex@example.com</strong> / password123<br>
+        Адмін: <strong>admin@market.ua</strong> / admin2024
+      </div>
+      <button class="auth-submit-btn" id="loginSubmitBtn">Увійти</button>
+    </div>
 
-      <div class="auth-panel" id="registerPanel">
-        <div class="form-group">
-          <label>Ім'я</label>
-          <input type="text" id="regName" placeholder="Ваше ім'я">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label>Пароль</label>
+    <div class="auth-panel" id="registerPanel">
+      <div class="form-group">
+        <label>Ім'я та прізвище</label>
+        <input type="text" id="regName" placeholder="Іван Іваненко">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Пароль</label>
+        <div class="input-eye-wrap">
           <input type="password" id="regPassword" placeholder="Мінімум 6 символів" autocomplete="new-password">
+          <button type="button" class="eye-btn" onclick="togglePwd('regPassword',this)">👁</button>
         </div>
-        <button class="auth-submit-btn" id="registerSubmitBtn">Зареєструватися</button>
+      </div>
+
+      <div class="form-group">
+        <label>Роль облікового запису</label>
+        <div class="role-selector">
+          <label class="role-option selected" id="roleUserOpt">
+            <input type="radio" name="regRole" value="user" id="roleUser" checked>
+            <div class="role-card">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Покупець</span>
+              <small>Перегляд і купівля товарів</small>
+            </div>
+          </label>
+          <label class="role-option" id="roleAdminOpt">
+            <input type="radio" name="regRole" value="admin" id="roleAdmin">
+            <div class="role-card">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Адміністратор</span>
+              <small>Повне управління магазином</small>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group hidden" id="adminCodeGroup">
+        <label>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Секретний код адміна
+        </label>
+        <input type="password" id="adminCode" placeholder="Введіть код доступу">
+        <span class="field-hint">Код: <strong>MARKET2024</strong> (демо)</span>
+      </div>
+
+      <button class="auth-submit-btn" id="registerSubmitBtn">Зареєструватися</button>
+    </div>
+
+    <div class="auth-panel" id="userMenuPanel">
+      <div class="user-menu-header">
+        <div class="user-menu-avatar" id="userMenuAvatar">?</div>
+        <div class="user-menu-info">
+          <strong id="userMenuName">—</strong>
+          <span id="userMenuEmail">—</span>
+          <span class="user-role-badge" id="userRoleBadge">user</span>
+        </div>
+      </div>
+      <div class="user-menu-stats" id="userMenuStats"></div>
+      <div class="user-menu-actions">
+        <button class="user-menu-btn" id="myOrdersBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Мої замовлення (<span id="userMenuOrderCount">0</span>)
+        </button>
+        <button class="user-menu-btn" onclick="openFavoritesView();closeAuthModal();">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Обране (<span id="userMenuFavCount">0</span>)
+        </button>
+        <button class="user-menu-btn admin-panel-link hidden" id="adminPanelLink">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Відкрити адмін-панель
+        </button>
+        <button class="user-menu-btn logout-btn" id="logoutBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Вийти з акаунту
+        </button>
       </div>
     </div>
+
   </div>
+</div>
 
-  <!-- ========== TOAST CONTAINER ========== -->
-  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+<div class="orders-modal-backdrop" id="ordersModalBackdrop"></div>
+<div class="orders-modal" id="ordersModal">
+  <div class="orders-modal-header">
+    <h2>Мої замовлення</h2>
+    <button class="close-btn" id="ordersCloseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="orders-modal-body" id="ordersModalBody"></div>
+</div>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <svg viewBox="0 0 36 36" fill="none" width="32" height="32">
-            <rect width="36" height="36" rx="8" fill="var(--accent)"/>
-            <path d="M8 10h20M8 18h20M8 26h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="27" cy="26" r="4" fill="#fff"/>
-          </svg>
-          <span class="logo-text">WONDERMARKET</span>
-        </a>
-        <p>Найбільший інтернет-магазин України. Понад 3 млн товарів від тисяч брендів.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" aria-label="TikTok">TK</a>
-          <a href="#" class="social-link" aria-label="Telegram">TG</a>
-          <a href="#" class="social-link" aria-label="Facebook">FB</a>
-          <a href="#" class="social-link" aria-label="Instagram">IN</a>
-          <a href="#" class="social-link" aria-label="YouTube">YT</a>
+<div class="admin-overlay" id="adminOverlay"></div>
+<div class="admin-panel" id="adminPanel">
+  <aside class="admin-nav">
+    <div class="admin-nav-logo">
+      <svg viewBox="0 0 32 32" fill="none" width="26" height="26"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M7 9h18M7 16h18M7 23h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="23" r="3.5" fill="#fff"/></svg>
+      <span>WONDER<span style="color:var(--accent)">MARKET</span></span>
+    </div>
+    <ul class="admin-nav-list">
+      <li><button class="admin-nav-btn active" data-section="dashboard">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Дашборд</span>
+      </button></li>
+      <li><button class="admin-nav-btn" data-section="products">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Товари</span>
+      </button></li>
+      <li><button class="admin-nav-btn" data-section="orders">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Замовлення</span><span class="admin-nav-badge" id="adminOrdersBadge">0</span>
+      </button></li>
+      <li><button class="admin-nav-btn" data-section="users">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Користувачі</span>
+      </button></li>
+      <li><button class="admin-nav-btn" data-section="analytics">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg><span>Аналітика</span>
+      </button></li>
+      <li><button class="admin-nav-btn" data-section="settings">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Налаштування</span>
+      </button></li>
+    </ul>
+    <button class="admin-close-nav-btn" id="adminCloseBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg><span>Закрити</span>
+    </button>
+  </aside>
+
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="admin-topbar-left">
+        <h1 class="admin-page-title" id="adminPageTitle">Дашборд</h1>
+        <span class="admin-breadcrumb">Адмін / <span id="adminBreadcrumb">Дашборд</span></span>
+      </div>
+      <div class="admin-topbar-right">
+        <div class="admin-user-chip">
+          <span class="admin-user-avatar" id="adminChipAvatar">AD</span>
+          <span id="adminChipName">Адміністратор</span>
         </div>
       </div>
+    </div>
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+</div>
 
-      <div class="footer-col">
-        <h4>Інформація</h4>
-        <ul>
-          <li><a href="#">Про нас</a></li>
-          <li><a href="#">Вакансії</a></li>
-          <li><a href="#">Умови використання</a></li>
-          <li><a href="#">Контакти</a></li>
-          <li><a href="#">Всі категорії</a></li>
-        </ul>
-      </div>
+<div class="pform-backdrop" id="pformBackdrop"></div>
+<div class="pform-modal" id="pformModal">
+  <div class="pform-header">
+    <h3 id="pformTitle">Додати товар</h3>
+    <button class="close-btn" id="pformCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="pform-body" id="pformBody"></div>
+</div>
 
-      <div class="footer-col">
-        <h4>Допомога</h4>
-        <ul>
-          <li><a href="#">Доставка та оплата</a></li>
-          <li><a href="#">Кредит</a></li>
-          <li><a href="#">Гарантія</a></li>
-          <li><a href="#">Повернення товару</a></li>
-          <li><a href="#">Сервісні центри</a></li>
-        </ul>
-      </div>
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-      <div class="footer-col">
-        <h4>Сервіси</h4>
-        <ul>
-          <li><a href="#">Бонусний рахунок</a></li>
-          <li><a href="#">Картка WONDERMARKET</a></li>
-          <li><a href="#">Подарункові сертифікати</a></li>
-          <li><a href="#">Обмін</a></li>
-          <li><a href="#">Корпоративним клієнтам</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Партнерам</h4>
-        <ul>
-          <li><a href="#">Продавати на WONDERMARKET</a></li>
-          <li><a href="#">Реклама</a></li>
-          <li><a href="#">Співпраця</a></li>
-          <li><a href="#">Франчайзинг</a></li>
-          <li><a href="#">Оренда приміщень</a></li>
-        </ul>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo" onclick="resetAll();return false;">
+        <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M7 9h18M7 16h18M7 23h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="23" r="3.5" fill="#fff"/></svg>
+        <span class="logo-text">WONDER<span class="logo-accent">MARKET</span></span>
+      </a>
+      <p>Найбільший інтернет-магазин України. Понад 3 млн товарів від тисяч брендів.</p>
+      <div class="social-links">
+        <a href="#" class="social-link">TK</a><a href="#" class="social-link">TG</a>
+        <a href="#" class="social-link">FB</a><a href="#" class="social-link">IN</a>
+        <a href="#" class="social-link">YT</a>
       </div>
     </div>
-
-    <div class="footer-bottom">
-      <div class="payment-icons">
-        <span class="payment-badge">VISA</span>
-        <span class="payment-badge">MC</span>
-        <span class="payment-badge">GPay</span>
-        <span class="payment-badge">APay</span>
-      </div>
-      <p class="footer-copy">© 2001–2026 WONDERMARKET™ — Щоразу що треба</p>
+    <div class="footer-col"><h4>Інформація</h4><ul><li><a href="#">Про нас</a></li><li><a href="#">Вакансії</a></li><li><a href="#">Умови використання</a></li><li><a href="#">Контакти</a></li></ul></div>
+    <div class="footer-col"><h4>Допомога</h4><ul><li><a href="#">Доставка та оплата</a></li><li><a href="#">Кредит</a></li><li><a href="#">Гарантія</a></li><li><a href="#">Повернення товару</a></li></ul></div>
+    <div class="footer-col"><h4>Сервіси</h4><ul><li><a href="#">Бонусний рахунок</a></li><li><a href="#">Картка WONDERMARKET</a></li><li><a href="#">Подарункові сертифікати</a></li><li><a href="#">Обмін</a></li></ul></div>
+    <div class="footer-col"><h4>Партнерам</h4><ul><li><a href="#">Продавати на WONDERMARKET</a></li><li><a href="#">Реклама</a></li><li><a href="#">Співпраця</a></li><li><a href="#">Франчайзинг</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <div class="payment-icons">
+      <span class="payment-badge">VISA</span><span class="payment-badge">MC</span>
+      <span class="payment-badge">GPay</span><span class="payment-badge">APay</span>
     </div>
-  </footer>
+    <p class="footer-copy">© 2001–2026 WONDERMARKET™ — Щоразу що треба</p>
+  </div>
+</footer>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
