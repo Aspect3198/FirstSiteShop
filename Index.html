@@ -10,12 +10,16 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════ -->
 <header class="header" id="header">
   <div class="header-inner">
     <button class="burger-btn" id="burgerBtn" aria-label="Меню">
       <span></span><span></span><span></span>
     </button>
 
+    <!-- Logo — left anchor -->
     <a href="#" class="logo" onclick="resetAll();return false;">
       <svg class="logo-icon" viewBox="0 0 32 32" fill="none" width="30" height="30">
         <rect width="32" height="32" rx="7" fill="var(--accent)"/>
@@ -25,6 +29,7 @@
       <span class="logo-text">WONDER<span class="logo-accent">MARKET</span></span>
     </a>
 
+    <!-- Right group: catalog + search + actions -->
     <div class="header-right">
       <button class="catalog-toggle-btn" id="catalogToggleBtn">
         <svg width="16" height="13" viewBox="0 0 18 14" fill="currentColor">
@@ -46,6 +51,7 @@
       </div>
 
       <div class="header-actions">
+        <!-- Admin — only for role=admin, hidden by default -->
         <button class="hdr-btn admin-hdr-btn hidden" id="adminPanelBtn" title="Адмін-панель">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -75,7 +81,7 @@
           <span class="badge" id="cartCount">0</span>
         </button>
       </div>
-    </div>
+    </div><!-- /.header-right -->
   </div>
 
   <div class="catalog-mega" id="catalogMega">
@@ -87,6 +93,9 @@
 
 <div class="overlay" id="overlay"></div>
 
+<!-- ═══════════════════════════════════════════
+     PAGE LAYOUT
+     ═══════════════════════════════════════════ -->
 <div class="page-layout">
 
   <aside class="sidebar" id="sidebar">
@@ -217,6 +226,10 @@
   </main>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     CART SIDEBAR
+     ═══════════════════════════════════════════ -->
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header">
     <h2><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Кошик</h2>
@@ -248,12 +261,20 @@
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT MODAL
+     ═══════════════════════════════════════════ -->
 <div class="modal-backdrop" id="modalBackdrop"></div>
 <div class="product-modal" id="productModal">
   <button class="close-btn modal-close-btn" id="modalCloseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <div class="modal-body" id="modalBody"></div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     AUTH MODAL
+     ═══════════════════════════════════════════ -->
 <div class="auth-modal" id="authModal">
   <div class="auth-card">
     <button class="close-btn auth-close-btn" id="authCloseBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -263,11 +284,13 @@
       <span>WONDER<span class="logo-accent">MARKET</span></span>
     </div>
 
+    <!-- Tabs (hidden when logged in) -->
     <div class="auth-tabs" id="authTabs">
       <button class="auth-tab active" data-tab="login" id="loginTabBtn">Увійти</button>
       <button class="auth-tab" data-tab="register" id="registerTabBtn">Реєстрація</button>
     </div>
 
+    <!-- LOGIN -->
     <div class="auth-panel active" id="loginPanel">
       <div class="form-group">
         <label>Email</label>
@@ -287,6 +310,7 @@
       <button class="auth-submit-btn" id="loginSubmitBtn">Увійти</button>
     </div>
 
+    <!-- REGISTER -->
     <div class="auth-panel" id="registerPanel">
       <div class="form-group">
         <label>Ім'я та прізвище</label>
@@ -304,6 +328,7 @@
         </div>
       </div>
 
+      <!-- Role selector -->
       <div class="form-group">
         <label>Роль облікового запису</label>
         <div class="role-selector">
@@ -326,6 +351,7 @@
         </div>
       </div>
 
+      <!-- Admin code (shown only when admin role selected) -->
       <div class="form-group hidden" id="adminCodeGroup">
         <label>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -338,6 +364,7 @@
       <button class="auth-submit-btn" id="registerSubmitBtn">Зареєструватися</button>
     </div>
 
+    <!-- USER MENU (shown when logged in) -->
     <div class="auth-panel" id="userMenuPanel">
       <div class="user-menu-header">
         <div class="user-menu-avatar" id="userMenuAvatar">?</div>
@@ -371,6 +398,10 @@
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     MY ORDERS MODAL
+     ═══════════════════════════════════════════ -->
 <div class="orders-modal-backdrop" id="ordersModalBackdrop"></div>
 <div class="orders-modal" id="ordersModal">
   <div class="orders-modal-header">
@@ -380,6 +411,10 @@
   <div class="orders-modal-body" id="ordersModalBody"></div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     ADMIN PANEL
+     ═══════════════════════════════════════════ -->
 <div class="admin-overlay" id="adminOverlay"></div>
 <div class="admin-panel" id="adminPanel">
   <aside class="admin-nav">
@@ -430,6 +465,10 @@
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT FORM MODAL (admin)
+     ═══════════════════════════════════════════ -->
 <div class="pform-backdrop" id="pformBackdrop"></div>
 <div class="pform-modal" id="pformModal">
   <div class="pform-header">
@@ -439,8 +478,16 @@
   <div class="pform-body" id="pformBody"></div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════
+     TOAST CONTAINER
+     ═══════════════════════════════════════════ -->
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
@@ -469,6 +516,6 @@
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>

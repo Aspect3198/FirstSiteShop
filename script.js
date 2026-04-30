@@ -1,12 +1,59 @@
-/* ================================================================
-   WONDERMARKET — script.js   v3.0
-   Full role-based marketplace: User + Admin Panel
-   ================================================================ */
+
 'use strict';
 
-// ================================================================
-// CONSTANTS
-// ================================================================
+import { createClient } from '@supabase/supabase-js'
+const SUPABASE_URL = 'https://bkldjrcyncxpfmjsegqq.supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_Kqe1m9DtX81brGFAXOa00A_53n-DtK-'; 
+
+const db = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// 2. Ваша функція нормалізації (вже перевірена)
+function normalizeProduct(row) {
+  return {
+    ...row,
+    oldPrice:    row.old_price    ?? row.oldPrice    ?? null,
+    inStock:     row.in_stock     ?? row.inStock     ?? true,
+    brand:       row.brand        ?? '',
+    discount:    row.discount     ?? 0,
+    reviews:     row.reviews      ?? 0,
+    popular:     row.popular      ?? 50,
+    description: row.description  ?? '',
+    images:      row.images       ?? [],
+    tags:        row.tags         ?? [],
+    specs:       row.specs        ?? {},
+  };
+}
+
+// 3. Функція для отримання всіх даних з бази
+async function fetchAllProducts() {
+  try {
+    // Зчитуємо всі колонки з таблиці 'products'
+    const { data, error } = await db
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true }); // Сортуємо по ID
+
+    if (error) throw error;
+
+    // Нормалізуємо кожен отриманий товар
+    const products = data.map(normalizeProduct);
+
+    console.log('Дані успішно зчитано:', products);
+    
+    // Викликаємо функцію рендеру (відображення) товарів на сторінці
+    // Наприклад: renderProducts(products);
+    return products;
+
+  } catch (err) {
+    console.error('Помилка при зчитуванні даних:', err.message);
+  }
+}
+
+// 4. Автоматичний запуск при завантаженні сторінки
+document.addEventListener('DOMContentLoaded', () => {
+  fetchAllProducts();
+});
+
 const SITE_NAME        = 'WONDERMARKET';
 const ADMIN_SECRET_CODE = 'MARKET2024';
 
@@ -38,6 +85,7 @@ const ORDER_STATUS_MAP = {
   cancelled: { label:'Скасовано',  cls:'status-cancelled' },
 };
 
+
 // ================================================================
 // STATE
 // ================================================================
@@ -62,15 +110,27 @@ const state = {
 // ================================================================
 // INIT
 // ================================================================
+// ================================================================
+// INIT — ЗАПУСК МАГАЗИНУ
+// ================================================================
 async function init() {
   document.title = SITE_NAME + ' — Інтернет-магазин';
-  await loadProducts();
+
+  try {
+    // 1. Зчитуємо та нормалізуємо дані відразу при старті
+    await loadProducts(); 
+  } catch (err) {
+    showLoadError(err.message);
+    return; // Зупиняємо ініціалізацію, якщо дані не завантажились
+  }
+
+  // 2. Ініціалізуємо інтерфейс, коли дані вже є в пам'яті
   loadFromStorage();
   renderCategories();
   renderMegaMenu();
   renderBrandFilter();
   renderRatingFilters();
-  applyFiltersAndRender();
+  applyFiltersAndRender(); // Ця функція відобразить товари на екрані
   initSlider();
   initPriceRange();
   attachEventListeners();
@@ -79,63 +139,29 @@ async function init() {
 }
 
 // ================================================================
-// PRODUCT DATA  — posts.json is the SINGLE SOURCE OF TRUTH
-// Images are always resolved from posts.json; never hardcoded in JS.
-// Admin edits (price, stock, badge, etc.) are preserved via localStorage,
-// but image URLs are always refreshed from posts.json on every page load.
+// ЗАВАНТАЖЕННЯ ТА НОРМАЛІЗАЦІЯ
 // ================================================================
 async function loadProducts() {
-  // Candidate URLs to try in order (supports both /data/ and root placement)
-  const CANDIDATES = ['./data/posts.json', './posts.json'];
+  console.log('Початок зчитування даних з Supabase...');
+  
+  const { data, error } = await db
+    .from('products')
+    .select('*')
+    .order('rating', { ascending: false }); // Сортуємо за рейтингом за замовчуванням
 
-  for (const url of CANDIDATES) {
-    try {
-      const res = await fetch(url);
-      if (!res.ok) continue;
-      const freshData = await res.json();
-      if (!Array.isArray(freshData) || freshData.length === 0) continue;
-
-      const saved = lsGet('mkt_products'); // may contain admin edits
-      if (saved && saved.length > 0) {
-        // Merge strategy:
-        //  - Base structure comes from posts.json (fresh images, categories, specs)
-        //  - Admin-edited fields (price, oldPrice, discount, inStock, badge, name, brand,
-        //    description) are preserved from localStorage
-        //  - image / images are ALWAYS taken from posts.json (single source of truth)
-        const merged = freshData.map(jsonProd => {
-          const edited = saved.find(s => s.id === jsonProd.id);
-          if (!edited) return jsonProd; // new product in posts.json
-          return {
-            ...edited,           // keep all admin edits
-            image:  jsonProd.image,   // always use posts.json image
-            images: jsonProd.images,  // always use posts.json images array
-          };
-        });
-        // Append any admin-created products (ids not in posts.json)
-        const adminCreated = saved.filter(s => !freshData.find(p => p.id === s.id));
-        state.allProducts = [...merged, ...adminCreated];
-      } else {
-        state.allProducts = freshData;
-      }
-      return; // success — stop trying
-    } catch (e) {
-      console.warn(`[WONDERMARKET] Could not load ${url}:`, e.message);
-    }
+  if (error) {
+    throw new Error(`Supabase Error: ${error.message}`);
   }
 
-  // Fallback 1: use cached localStorage version (offline / no server)
-  const saved = lsGet('mkt_products');
-  if (saved && saved.length > 0) {
-    console.info('[WONDERMARKET] Using cached products from localStorage');
-    state.allProducts = saved;
-    return;
+  if (!Array.isArray(data)) {
+    throw new Error('Очікувався масив даних, але отримано щось інше');
   }
 
-  // Fallback 2: inline data (identical to posts.json — for file:// protocol)
-  console.info('[WONDERMARKET] Using inline fallback product data');
-  state.allProducts = getInlineProducts();
+  // Використовуємо вашу функцію normalizeProduct для обробки кожного товару
+  state.allProducts = data.map(normalizeProduct);
+  
+  console.log('Дані успішно завантажено та нормалізовано:', state.allProducts.length, 'товарів');
 }
-
 // ================================================================
 // STORAGE HELPERS
 // ================================================================
@@ -144,21 +170,18 @@ function lsSet(key, value) { try { localStorage.setItem(key, JSON.stringify(valu
 function lsDel(key)        { try { localStorage.removeItem(key); } catch(e){} }
 
 function saveAll() {
-  lsSet('mkt_cart',      state.cart);
-  lsSet('mkt_fav',       state.favorites);
-  lsSet('mkt_products',  state.allProducts);
+  lsSet('mkt_cart',  state.cart);
+  lsSet('mkt_fav',   state.favorites);
   if (state.user) lsSet('mkt_user', state.user);
 }
 
 function loadFromStorage() {
-  const cart  = lsGet('mkt_cart');
-  const fav   = lsGet('mkt_fav');
-  const user  = lsGet('mkt_user');
-  const prods = lsGet('mkt_products');
-  if (cart)  state.cart      = cart;
-  if (fav)   state.favorites = fav;
-  if (user)  state.user      = user;
-  if (prods && prods.length > 0) state.allProducts = prods;
+  const cart = lsGet('mkt_cart');
+  const fav  = lsGet('mkt_fav');
+  const user = lsGet('mkt_user');
+  if (cart) state.cart      = cart;
+  if (fav)  state.favorites = fav;
+  if (user) state.user      = user;
 }
 
 // Registered users DB (persisted in localStorage)
@@ -1073,21 +1096,54 @@ function adminFilterProductsCat(cat) {
 }
 window.adminFilterProductsCat=adminFilterProductsCat;
 
-function adminToggleStock(id) {
-  const p=state.allProducts.find(x=>x.id===id); if(!p) return;
-  p.inStock=!p.inStock; saveAll(); renderAdminSection('products'); applyFiltersAndRender();
-  showToast('Оновлено',`${trunc(p.name,28)} — ${p.inStock?'в наявності':'немає'}`, 'info');
+async function adminToggleStock(id) {
+  const p = state.allProducts.find(x => x.id === id);
+  if (!p) return;
+
+  const newStock = !p.inStock;
+
+  const { error } = await db
+    .from('products')
+    .update({ in_stock: newStock })
+    .eq('id', id);
+
+  if (error) {
+    showToast('Помилка', error.message, 'error');
+    return;
+  }
+
+  // Update in-memory state only after the DB call succeeds
+  p.inStock = newStock;
+  renderAdminSection('products');
+  applyFiltersAndRender();
+  showToast('Оновлено', `${trunc(p.name, 28)} — ${p.inStock ? 'в наявності' : 'немає'}`, 'info');
 }
 window.adminToggleStock=adminToggleStock;
 
-function adminDeleteProduct(id) {
-  const p=state.allProducts.find(x=>x.id===id); if(!p) return;
-  if(!confirm(`Видалити "${trunc(p.name,40)}"?`)) return;
-  state.allProducts=state.allProducts.filter(x=>x.id!==id);
-  state.cart=state.cart.filter(c=>c.id!==id);
-  state.favorites=state.favorites.filter(f=>f!==id);
-  saveAll(); renderAdminSection('products'); applyFiltersAndRender();
-  showToast('Видалено',trunc(p.name,34),'warning');
+async function adminDeleteProduct(id) {
+  const p = state.allProducts.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm(`Видалити "${trunc(p.name, 40)}"?`)) return;
+
+  const { error } = await db
+    .from('products')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    showToast('Помилка видалення', error.message, 'error');
+    return;
+  }
+
+  // Remove from in-memory state only after the DB call succeeds
+  state.allProducts = state.allProducts.filter(x => x.id !== id);
+  state.cart        = state.cart.filter(c => c.id !== id);
+  state.favorites   = state.favorites.filter(f => f !== id);
+
+  saveAll(); // persist cart / favorites changes to localStorage
+  renderAdminSection('products');
+  applyFiltersAndRender();
+  showToast('Видалено', trunc(p.name, 34), 'warning');
 }
 window.adminDeleteProduct=adminDeleteProduct;
 
@@ -1174,40 +1230,102 @@ function closePform() {
 }
 window.closePform=closePform;
 
-function adminSaveProduct(editId) {
-  const name    =document.getElementById('pf_name')?.value.trim();
-  const brand   =document.getElementById('pf_brand')?.value.trim();
-  const cat     =document.getElementById('pf_cat')?.value;
-  const price   =+document.getElementById('pf_price')?.value;
-  const oldPrice=+document.getElementById('pf_oldprice')?.value||null;
-  const discount=+document.getElementById('pf_discount')?.value||0;
-  const rating  =+document.getElementById('pf_rating')?.value||4.5;
-  const reviews =+document.getElementById('pf_reviews')?.value||0;
-  const badge   =document.getElementById('pf_badge')?.value||'';
-  const image   =document.getElementById('pf_image')?.value.trim();
-  const desc    =document.getElementById('pf_desc')?.value.trim();
-  const inStock =document.getElementById('pf_instock')?.checked;
+async function adminSaveProduct(editId) {
+  const name     = document.getElementById('pf_name')?.value.trim();
+  const brand    = document.getElementById('pf_brand')?.value.trim();
+  const cat      = document.getElementById('pf_cat')?.value;
+  const price    = +document.getElementById('pf_price')?.value;
+  const oldPrice = +document.getElementById('pf_oldprice')?.value || null;
+  const discount = +document.getElementById('pf_discount')?.value || 0;
+  const rating   = +document.getElementById('pf_rating')?.value  || 4.5;
+  const reviews  = +document.getElementById('pf_reviews')?.value || 0;
+  const badge    = document.getElementById('pf_badge')?.value    || '';
+  const image    = document.getElementById('pf_image')?.value.trim();
+  const desc     = document.getElementById('pf_desc')?.value.trim();
+  const inStock  = document.getElementById('pf_instock')?.checked;
 
-  if(!name||!brand||!price){ showToast('Помилка','Заповніть обов\'язкові поля (*)','error'); return; }
-
-  if(editId) {
-    const p=state.allProducts.find(x=>x.id===editId);
-    if(p) Object.assign(p,{name,brand,category:cat,price,oldPrice,discount,rating,reviews,badge,image:image||p.image,description:desc,inStock});
-    showToast('Збережено',trunc(name,34),'success');
-  } else {
-    const exists=state.allProducts.find(p=>p.name.toLowerCase()===name.toLowerCase()&&p.brand.toLowerCase()===brand.toLowerCase());
-    if(exists){ showToast('Дублікат','Товар з такою назвою вже є','warning'); return; }
-    state.allProducts.unshift({
-      id:Date.now(), name, brand, category:cat, price, oldPrice, discount, rating, reviews, badge,
-      image:image||`https://picsum.photos/seed/${Date.now()}/400/400`,
-      images:image?[image]:[],
-      description:desc, inStock, popular:50, tags:[],
-    });
-    showToast('Товар додано',trunc(name,34),'success');
+  if (!name || !brand || !price) {
+    showToast('Помилка', "Заповніть обов'язкові поля (*)", 'error');
+    return;
   }
 
-  saveAll(); closePform();
-  renderAdminSection('products'); applyFiltersAndRender(); renderCategories();
+  if (editId) {
+    // ── UPDATE ──────────────────────────────────────────────────
+    const existing = state.allProducts.find(x => x.id === editId);
+    if (!existing) return;
+
+    // Use Supabase snake_case column names for the DB payload
+    const dbPayload = {
+      name, brand, category: cat, price,
+      old_price:   oldPrice,
+      discount,    rating, reviews, badge,
+      description: desc,
+      in_stock:    inStock,
+      image:       image || existing.image,
+    };
+
+    // Optimistic update in memory for instant UI feedback
+    Object.assign(existing, normalizeProduct({ ...existing, ...dbPayload }));
+
+    const { error } = await db
+      .from('products')
+      .update(dbPayload)
+      .eq('id', editId);
+
+    if (error) {
+      // Revert: reload fresh data from Supabase
+      await loadProducts();
+      showToast('Помилка збереження', error.message, 'error');
+      return;
+    }
+
+    showToast('Збережено', trunc(name, 34), 'success');
+
+  } else {
+    // ── INSERT ──────────────────────────────────────────────────
+    const duplicate = state.allProducts.find(
+      p => p.name.toLowerCase() === name.toLowerCase() &&
+           p.brand.toLowerCase() === brand.toLowerCase()
+    );
+    if (duplicate) {
+      showToast('Дублікат', 'Товар з такою назвою вже є', 'warning');
+      return;
+    }
+
+    // Use Supabase snake_case column names for the DB payload
+    const dbPayload = {
+      name, brand, category: cat, price,
+      old_price:   oldPrice,
+      discount,    rating, reviews, badge,
+      description: desc,
+      in_stock:    inStock,
+      image:  image || `https://picsum.photos/seed/${Date.now()}/400/400`,
+      images: image ? [image] : [],
+      popular: 50,
+      tags:    [],
+      specs:   {},
+    };
+
+    const { data: inserted, error } = await db
+      .from('products')
+      .insert(dbPayload)
+      .select()
+      .single();
+
+    if (error) {
+      showToast('Помилка', error.message, 'error');
+      return;
+    }
+
+    // Normalize the returned DB row before adding to state
+    state.allProducts.unshift(normalizeProduct(inserted));
+    showToast('Товар додано', trunc(name, 34), 'success');
+  }
+
+  closePform();
+  renderAdminSection('products');
+  applyFiltersAndRender();
+  renderCategories();
 }
 window.adminSaveProduct=adminSaveProduct;
 
@@ -1403,8 +1521,8 @@ function renderAdminSettings() {
         <div class="adm-sys-row"><span>Користувачів</span><span>${getUsers().length}</span></div>
         <div class="adm-sys-row"><span>Замовлень</span><span>${getOrders().length}</span></div>
         <div class="adm-sys-row"><span>Секрет-код</span><span style="color:var(--adm-orange)">MARKET2024</span></div>
-        <div class="adm-sys-row"><span>localStorage</span><span style="color:var(--adm-green)">Активний</span></div>
-        <div class="adm-sys-row"><span>Режим</span><span style="color:var(--adm-orange)">Demo</span></div>
+        <div class="adm-sys-row"><span>База даних</span><span style="color:var(--adm-green)">Supabase</span></div>
+        <div class="adm-sys-row"><span>Проект</span><span style="color:var(--adm-text3)">bkldjrcyncxpfmjsegqq</span></div>
       </div>
       <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
         <button class="adm-btn-danger" onclick="if(confirm('Видалити всі замовлення?')){lsSet('mkt_orders',[]);renderAdminSection('settings');showToast('Очищено','Всі замовлення видалено','warning');}">Очистити замовлення</button>
@@ -1593,31 +1711,34 @@ function attachEventListeners() {
 }
 
 // ================================================================
-// INLINE FALLBACK PRODUCTS
+// LOAD ERROR — displayed when Supabase cannot be reached
 // ================================================================
-function getInlineProducts() {
-  return [
-    { id:1,  name:"Телевізор TCL 55P7K QLED 4K",          category:"tv",          brand:"TCL",               price:46999, oldPrice:63399, discount:26, rating:4.7, reviews:342,  image:"https://images.unsplash.com/photo-1593359677879-a4bb92f4e10a?w=400&h=400&fit=crop", images:[], description:"Телевізор TCL 55P7K з технологією QLED та підтримкою 4K HDR. Частота оновлення 144 Гц.", specs:{"Діагональ":"55\"","Роздільна здатність":"4K","ОС":"Google TV"}, inStock:true, popular:95, tags:["4K","QLED"], badge:"" },
-    { id:2,  name:"Apple iPhone 15 Pro 256GB",              category:"smartphones", brand:"Apple",             price:45999, oldPrice:52999, discount:13, rating:4.9, reviews:1204, image:"https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop", images:[], description:"iPhone 15 Pro з чіпом A17 Pro та титановим корпусом.", specs:{"Чіп":"A17 Pro","Екран":"6.1\""}, inStock:true, popular:99, tags:["Apple","iOS"], badge:"top" },
-    { id:3,  name:"Samsung Galaxy S24 Ultra 512GB",         category:"smartphones", brand:"Samsung",           price:49999, oldPrice:59999, discount:17, rating:4.8, reviews:876,  image:"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&h=400&fit=crop", images:[], description:"Samsung Galaxy S24 Ultra з S Pen та камерою 200 МП.", specs:{"Камера":"200 МП"}, inStock:true, popular:92, tags:["Samsung","S Pen"], badge:"" },
-    { id:4,  name:"Sony PlayStation 5 Slim 1TB",            category:"gaming",      brand:"Sony",              price:35499, oldPrice:59999, discount:14, rating:4.9, reviews:2103, image:"https://images.unsplash.com/photo-1607853202273-797f1c22a38e?w=400&h=400&fit=crop", images:[], description:"PlayStation 5 Slim з 1ТБ SSD та підтримкою 4K 120fps.", specs:{"Накопичувач":"1 TB"}, inStock:true, popular:97, tags:["PS5","4K"], badge:"top" },
-    { id:5,  name:"ASUS ROG Strix G16 RTX 4070",            category:"computers",   brand:"ASUS",              price:68999, oldPrice:79999, discount:14, rating:4.7, reviews:445,  image:"https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=400&fit=crop", images:[], description:"Ігровий ноутбук з RTX 4070 та дисплеєм 240 Гц.", specs:{"GPU":"RTX 4070"}, inStock:true, popular:88, tags:["Gaming"], badge:"" },
-    { id:6,  name:"Apple MacBook Pro 14\" M3 Pro",           category:"computers",   brand:"Apple",             price:89999, oldPrice:99999, discount:10, rating:4.9, reviews:678,  image:"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop", images:[], description:"MacBook Pro 14\" з чіпом M3 Pro та 18 ГБ RAM.", specs:{"Чіп":"M3 Pro"}, inStock:true, popular:91, tags:["macOS"], badge:"" },
-    { id:7,  name:"Sony WH-1000XM5 Навушники",              category:"audio",       brand:"Sony",              price:12499, oldPrice:15999, discount:22, rating:4.8, reviews:934,  image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop", images:[], description:"Флагманські навушники з найкращим ANC у класі.", specs:{"ANC":"Так","Час":"30 год"}, inStock:true, popular:85, tags:["ANC"], badge:"sale" },
-    { id:8,  name:"Apple AirPods Pro 2nd Gen",               category:"audio",       brand:"Apple",             price:8999,  oldPrice:10999, discount:18, rating:4.7, reviews:1567, image:"https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=400&h=400&fit=crop", images:[], description:"AirPods Pro 2 з адаптивним ANC та чіпом H2.", specs:{"Чіп":"H2"}, inStock:true, popular:89, tags:["ANC"], badge:"" },
-    { id:9,  name:"Dyson V15 Detect Absolute",               category:"appliances",  brand:"Dyson",             price:21999, oldPrice:27999, discount:21, rating:4.6, reviews:523,  image:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop", images:[], description:"Бездротовий пилосос з лазерним виявленням пилу.", specs:{"Час":"60 хв"}, inStock:true, popular:78, tags:["HEPA"], badge:"" },
-    { id:10, name:"Миша A4Tech Bloody W95 Ultra",            category:"gaming",      brand:"A4Tech",            price:1449,  oldPrice:1999,  discount:27, rating:4.5, reviews:1203, image:"https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop", images:[], description:"Ігрова миша 16000 DPI з RGB підсвіткою.", specs:{"DPI":"16000"}, inStock:true, popular:82, tags:["RGB"], badge:"sale" },
-    { id:11, name:"Ігровий килимок Hator Tonn S Speed",      category:"gaming",      brand:"Hator",             price:199,   oldPrice:null,  discount:0,  rating:4.4, reviews:456,  image:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=400&fit=crop", images:[], description:"Ігровий килимок Speed з гумовою основою.", specs:{"Розмір":"360×320"}, inStock:true, popular:70, tags:["Gaming"], badge:"" },
-    { id:12, name:"Nike Air Max 270 React",                  category:"clothing",    brand:"Nike",              price:4599,  oldPrice:5999,  discount:23, rating:4.6, reviews:789,  image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", images:[], description:"Кросівки з революційною підошвою React.", specs:{"Підошва":"Air Max+React"}, inStock:true, popular:87, tags:["Running"], badge:"" },
-    { id:13, name:"Adidas Originals Hoodie Trefoil",         category:"clothing",    brand:"Adidas",            price:2499,  oldPrice:3299,  discount:24, rating:4.5, reviews:334,  image:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop", images:[], description:"Класичне худі з логотипом Trefoil.", specs:{"Матеріал":"80% бавовна"}, inStock:true, popular:75, tags:["Casual"], badge:"sale" },
-    { id:14, name:"Протеїн Optimum Nutrition Gold Standard", category:"sports",      brand:"Optimum Nutrition", price:3299,  oldPrice:3999,  discount:17, rating:4.8, reviews:2341, image:"https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=400&h=400&fit=crop", images:[], description:"Найпродаваніший протеїн у світі. 24г протеїну на порцію.", specs:{"Протеїн":"24г"}, inStock:true, popular:93, tags:["Whey"], badge:"top" },
-    { id:15, name:"Килимок для йоги Adidas ADYG-10400",      category:"sports",      brand:"Adidas",            price:1299,  oldPrice:1799,  discount:28, rating:4.4, reviews:567,  image:"https://images.unsplash.com/photo-1601422407692-ec4eeec1d9b3?w=400&h=400&fit=crop", images:[], description:"Килимок для йоги 6 мм з антиковзним покриттям.", specs:{"Товщина":"6 мм"}, inStock:true, popular:68, tags:["Yoga"], badge:"" },
-    { id:16, name:"Клавіатура HyperX Alloy Origins 65",      category:"computers",   brand:"HyperX",            price:3999,  oldPrice:5299,  discount:25, rating:4.7, reviews:723,  image:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop", images:[], description:"Механічна клавіатура 65% з RGB та алюмінієвим корпусом.", specs:{"Перемикачі":"Red Linear"}, inStock:true, popular:80, tags:["Mechanical"], badge:"" },
-    { id:17, name:"Шоколад Spell Dark No Sugar 85г",         category:"food",        brand:"Spell",             price:179,   oldPrice:209,   discount:14, rating:4.6, reviews:234,  image:"https://images.unsplash.com/photo-1606312619070-d48b8c7c84a4?w=400&h=400&fit=crop", images:[], description:"Чорний шоколад 85% без цукру, веганський.", specs:{"Какао":"85%"}, inStock:true, popular:65, tags:["Vegan"], badge:"new" },
-    { id:18, name:"Оливкова олія Borges Extra Light 1л",     category:"food",        brand:"Borges",            price:319,   oldPrice:619,   discount:48, rating:4.7, reviews:892,  image:"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop", images:[], description:"Оливкова олія Extra Light для смаження.", specs:{"Об'єм":"1 л"}, inStock:true, popular:72, tags:["Spain"], badge:"sale" },
-    { id:19, name:"Крем La Roche-Posay Effaclar",            category:"beauty",      brand:"La Roche-Posay",    price:899,   oldPrice:1199,  discount:25, rating:4.8, reviews:1456, image:"https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop", images:[], description:"Крем-гель для жирної шкіри з матуючим ефектом.", specs:{"Об'єм":"40 мл"}, inStock:true, popular:86, tags:["Acne"], badge:"" },
-    { id:20, name:"Набір парфумів Chanel N°5",               category:"beauty",      brand:"Chanel",            price:7499,  oldPrice:9299,  discount:19, rating:4.9, reviews:345,  image:"https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&h=400&fit=crop", images:[], description:"Подарунковий набір Chanel N°5 EDP 100мл + подарунки.", specs:{"Концентрація":"EDP"}, inStock:true, popular:90, tags:["Iconic"], badge:"top" },
-  ];
+function showLoadError(message) {
+  const grid  = document.getElementById('productGrid');
+  const empty = document.getElementById('emptyState');
+  const info  = document.getElementById('resultsInfo');
+
+  if (info)  info.innerHTML = '';
+  if (empty) empty.classList.add('hidden');
+
+  if (grid) {
+    grid.innerHTML = `
+      <div class="load-error-state">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none"
+             stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <circle cx="12" cy="16" r="0.5" fill="var(--accent)"/>
+        </svg>
+        <h3>Не вдалося завантажити товари</h3>
+        <p>${message}</p>
+        <button class="btn-apply" onclick="location.reload()" style="width:auto;padding:10px 28px;margin-top:8px">
+          Спробувати знову
+        </button>
+      </div>`;
+  }
+
+  console.error('[WONDERMARKET] loadProducts failed:', message);
 }
 
 // ================================================================
