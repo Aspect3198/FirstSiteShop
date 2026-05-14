@@ -1,4 +1,3 @@
-
 'use strict';
 
 import { createClient } from '@supabase/supabase-js'
@@ -426,6 +425,7 @@ function addToCart(productId) {
   }
   saveAll(); updateCountBadges(); renderCartUI(); updateCardCartState(productId,true);
 }
+window.addToCart = addToCart;  // exposed for inline onclick in dynamically rendered cards
 
 function removeFromCart(productId) {
   const p=state.allProducts.find(x=>x.id===productId);
@@ -433,6 +433,7 @@ function removeFromCart(productId) {
   saveAll(); updateCountBadges(); renderCartUI(); updateCardCartState(productId,false);
   if(p) showToast('Видалено з кошика',trunc(p.name,36),'warning');
 }
+window.removeFromCart = removeFromCart;  // exposed for inline onclick in cart UI
 
 function updateQty(productId, delta) {
   const item=state.cart.find(c=>c.id===productId);
@@ -550,6 +551,7 @@ function toggleFavorite(productId) {
   });
   updateUserMenuStats();
 }
+window.toggleFavorite = toggleFavorite;  // exposed for inline onclick in dynamically rendered cards
 
 function openFavoritesView() {
   state.filtered=state.allProducts.filter(p=>state.favorites.includes(p.id));
@@ -631,6 +633,7 @@ function closeModal() {
   document.body.style.overflow='';
 }
 window.closeModal=closeModal;
+window.openProductModal = openProductModal;  // exposed for inline onclick on product cards
 
 function switchModalImg(src,thumb) {
   document.getElementById('modalMainImg').src=src;
