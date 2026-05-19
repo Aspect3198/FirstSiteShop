@@ -1,0 +1,208 @@
+/* =========================================================
+   badges.css  —  Product badges, load-error state, admin extras
+   ========================================================= */
+
+/* =============================================
+   AUTH — ROLE SELECTOR
+   ============================================= */
+.role-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.role-option { cursor: pointer; }
+.role-option input { display: none; }
+.role-card {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 14px 10px; border: 2px solid var(--border); border-radius: var(--radius);
+  background: var(--bg3); transition: var(--tr); text-align: center;
+}
+.role-card span:first-of-type { font-size: 13px; font-weight: 700; color: var(--text2); }
+.role-card small { font-size: 11px; color: var(--text3); }
+.role-option.selected .role-card,
+.role-option:has(input:checked) .role-card {
+  border-color: var(--accent); background: var(--accent-light); color: var(--accent);
+}
+.role-option.selected .role-card span:first-of-type,
+.role-option:has(input:checked) .role-card span:first-of-type { color: var(--accent); }
+.role-option.selected .role-card svg,
+.role-option:has(input:checked) .role-card svg { stroke: var(--accent); }
+.field-hint { font-size: 11px; color: var(--text3); margin-top: 4px; display: block; }
+.input-eye-wrap { position: relative; }
+.input-eye-wrap input { width: 100%; padding-right: 42px; }
+.eye-btn {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 16px; color: var(--text3);
+  transition: var(--tr); padding: 2px;
+}
+.eye-btn:hover { color: var(--text); }
+
+/* Header admin button */
+.admin-hdr-btn { color: var(--accent) !important; background: var(--accent-light) !important; border-radius: var(--radius-sm); }
+.admin-hdr-btn:hover { background: var(--accent) !important; color: #fff !important; }
+.admin-hdr-btn .hdr-btn-label { color: inherit; }
+
+/* =============================================
+   USER MENU PANEL
+   ============================================= */
+.user-menu-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px;
+}
+.user-menu-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800; flex-shrink: 0;
+}
+.user-menu-info { flex: 1; min-width: 0; }
+.user-menu-info strong { display: block; font-size: 14px; font-weight: 800; color: var(--text); }
+.user-menu-info span  { display: block; font-size: 12px; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 800; margin-top: 4px;
+}
+.user-role-badge.role-admin { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+.user-role-badge.role-user  { background: var(--accent-light);   color: var(--accent); }
+
+.user-menu-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px;
+}
+.user-stat {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 10px 6px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;
+}
+.user-stat span { font-size: 15px; font-weight: 800; color: var(--accent); }
+.user-stat small { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; }
+
+.user-menu-actions { display: flex; flex-direction: column; gap: 6px; }
+.user-menu-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--radius-sm);
+  background: var(--bg3); border: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; color: var(--text2); transition: var(--tr);
+  cursor: pointer; width: 100%; text-align: left;
+}
+.user-menu-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.user-menu-btn svg { flex-shrink: 0; }
+.admin-panel-link { border-color: rgba(139,92,246,0.3) !important; color: #8b5cf6 !important; background: rgba(139,92,246,0.06) !important; }
+.admin-panel-link:hover { background: rgba(139,92,246,0.12) !important; }
+.logout-btn:hover { border-color: #ffb3b3 !important; color: #ff4d4d !important; background: #fff5f5 !important; }
+.auth-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 18px; }
+
+/* =============================================
+   MY ORDERS MODAL
+   ============================================= */
+.orders-modal-backdrop {
+  position: fixed; inset: 0; z-index: 400;
+  background: rgba(0,0,0,0.48); backdrop-filter: blur(5px);
+  opacity: 0; pointer-events: none; transition: opacity var(--tr);
+}
+.orders-modal-backdrop.active { opacity: 1; pointer-events: all; }
+.orders-modal {
+  position: fixed; top: 50%; left: 50%; z-index: 450;
+  transform: translate(-50%, -50%) scale(0.96) translateY(20px);
+  width: min(680px, 95vw); max-height: 85vh;
+  background: #fff; border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; display: flex; flex-direction: column;
+  transition: all var(--tr);
+}
+.orders-modal.open { opacity: 1; pointer-events: all; transform: translate(-50%,-50%) scale(1) translateY(0); }
+.orders-modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.orders-modal-header h2 { font-size: 18px; font-weight: 800; }
+.orders-modal-body { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+.orders-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; gap: 12px; color: var(--text3); text-align: center; }
+.orders-empty p { font-size: 16px; font-weight: 700; color: var(--text2); }
+.orders-empty small { font-size: 13px; }
+
+.order-card {
+  border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+  transition: var(--tr); background: #fff;
+}
+.order-card:hover { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.order-card-head {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  background: var(--bg3); border-bottom: 1px solid var(--border); flex-wrap: wrap;
+}
+.order-id { font-family: monospace; font-weight: 800; font-size: 13px; color: var(--text2); flex: 1; }
+.order-date { font-size: 12px; color: var(--text3); }
+.order-status-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 800; }
+.status-pending    { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.status-processing { background: rgba(59,130,246,0.12); color: #3b82f6; }
+.status-shipped    { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+.status-delivered  { background: rgba(0,199,60,0.10);  color: var(--accent); }
+.status-cancelled  { background: rgba(239,68,68,0.10); color: #ef4444; }
+.order-items-preview {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 14px;
+}
+.order-items-preview img {
+  width: 46px; height: 46px; border-radius: 6px;
+  object-fit: cover; border: 1px solid var(--border);
+}
+.order-items-more {
+  width: 46px; height: 46px; border-radius: 6px;
+  background: var(--bg4); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--text3);
+}
+.order-card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--text3);
+}
+.order-card-foot strong { color: var(--accent); font-size: 15px; }
+
+/* =============================================
+   PRODUCT BADGES
+   ============================================= */
+.product-badge {
+  position: absolute; bottom: 8px; left: 8px; z-index: 3;
+  padding: 3px 8px; border-radius: 5px;
+  font-size: 10px; font-weight: 900; letter-spacing: 0.06em;
+}
+.badge-new  { background: #3b82f6; color: #fff; }
+.badge-sale { background: #f59e0b; color: #fff; }
+.badge-top  { background: #8b5cf6; color: #fff; }
+.adm-prod-badge { padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 800; }
+.badge-new  { background: #3b82f6; color: #fff; }
+.badge-sale { background: #f59e0b; color: #fff; }
+.badge-top  { background: #8b5cf6; color: #fff; }
+
+/* Admin nav badge */
+.admin-nav-badge {
+  min-width: 18px; height: 18px; padding: 0 5px;
+  background: #f59e0b; color: #fff; border-radius: 9px;
+  font-size: 11px; font-weight: 800; display: inline-flex;
+  align-items: center; justify-content: center; margin-left: auto;
+}
+
+/* adm-input inside settings */
+.adm-input {
+  width: 100%; height: 40px; padding: 0 12px;
+  background: var(--adm-bg); border: 1.5px solid var(--adm-border);
+  border-radius: 8px; color: var(--adm-text); font-size: 13px;
+  font-family: inherit; outline: none; transition: 0.2s;
+}
+.adm-input:focus { border-color: var(--adm-green); background: #fff; }
+
+/* adm-sys-info */
+.adm-sys-info { display: flex; flex-direction: column; gap: 0; }
+.adm-sys-row {
+  display: flex; justify-content: space-between; padding: 9px 0;
+  border-bottom: 1px solid var(--adm-border); font-size: 13px; color: var(--adm-text2);
+}
+.adm-sys-row:last-child { border-bottom: none; }
+.adm-sys-row span:first-child { color: var(--adm-text3); }
+.adm-sys-row span:last-child  { font-weight: 700; }
+
+/* pform textarea */
+.pform-grid textarea {
+  width: 100%; padding: 9px 12px; background: var(--adm-bg);
+  border: 1.5px solid var(--adm-border); border-radius: 8px;
+  color: var(--adm-text); font-size: 13px; font-family: inherit;
+  outline: none; transition: 0.2s; resize: vertical;
+}

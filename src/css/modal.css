@@ -1,0 +1,46 @@
+/* =========================================================
+   modal.css  —  Product detail modal
+   ========================================================= */
+
+/* =============================================
+   PRODUCT MODAL
+   ============================================= */
+.modal-backdrop { position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.48); backdrop-filter: blur(5px); opacity: 0; pointer-events: none; transition: opacity var(--tr); }
+.modal-backdrop.active { opacity: 1; pointer-events: all; }
+.product-modal {
+  position: fixed; top: 50%; left: 50%; z-index: 450;
+  transform: translate(-50%, -50%) scale(0.96);
+  width: min(900px, 95vw); max-height: 88vh;
+  background: #fff; border: 1px solid var(--border); border-top: 3px solid var(--accent);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  overflow: hidden; opacity: 0; pointer-events: none; transition: opacity var(--tr), transform var(--tr);
+}
+.product-modal.active { opacity: 1; pointer-events: all; transform: translate(-50%, -50%) scale(1); }
+.modal-close-btn { position: absolute; top: 14px; right: 14px; z-index: 10; }
+.modal-body { display: grid; grid-template-columns: 1fr 1fr; overflow-y: auto; max-height: 88vh; }
+.modal-gallery { background: var(--bg3); padding: 24px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--border); }
+.modal-main-img { width: 100%; aspect-ratio: 1; border-radius: var(--radius); object-fit: cover; background: var(--bg4); border: 1px solid var(--border); }
+.modal-thumbs { display: flex; gap: 8px; }
+.modal-thumb { width: 58px; height: 58px; border-radius: var(--radius-sm); object-fit: cover; background: var(--bg4); cursor: pointer; border: 2px solid var(--border); transition: var(--tr); }
+.modal-thumb.active, .modal-thumb:hover { border-color: var(--accent); }
+.modal-info { padding: 28px; overflow-y: auto; }
+.modal-brand { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+.modal-title { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; color: var(--text); }
+.modal-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.modal-review-count { font-size: 13px; color: var(--text3); }
+.modal-price-wrap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; padding: 14px; background: var(--bg3); border-radius: var(--radius); border: 1px solid var(--border); }
+.modal-price { font-size: 30px; font-weight: 800; color: var(--accent); }
+.modal-old-price { font-size: 15px; color: var(--text-muted); text-decoration: line-through; }
+.modal-save { font-size: 13px; color: var(--accent); font-weight: 700; margin: 8px 0 16px; }
+.modal-desc { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 18px; }
+.modal-specs { margin-bottom: 22px; }
+.modal-specs h4 { font-size: 12px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); display: inline-block; }
+.spec-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.spec-key { color: var(--text3); }
+.spec-val { font-weight: 600; color: var(--text); text-align: right; }
+.modal-actions { display: flex; gap: 10px; }
+.modal-cart-btn { flex: 1; height: 46px; border-radius: var(--radius-sm); background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; transition: var(--tr); border: 2px solid var(--accent); }
+.modal-cart-btn:hover { background: var(--accent-hover); box-shadow: var(--shadow-acc); }
+.modal-wish-btn { width: 46px; height: 46px; border-radius: var(--radius-sm); background: #fff; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text3); transition: var(--tr); }
+.modal-wish-btn:hover, .modal-wish-btn.active { border-color: #ff4d6a; color: #ff4d6a; background: #fff5f7; }
+.modal-wish-btn.active svg { fill: #ff4d6a; }

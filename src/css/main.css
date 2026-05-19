@@ -1,0 +1,32 @@
+/* ================================================================
+   src/css/main.css
+   Master stylesheet — imports all partials in cascade order.
+   Vite resolves @import natively in dev; PostCSS handles prod.
+   ================================================================ */
+
+/* 1 ── Design tokens (must be first — sets all CSS variables) */
+@import './variables.css';
+
+/* 2 ── Structural skeleton */
+@import './layout.css';
+
+/* 3 ── Page regions */
+@import './header.css';
+@import './products.css';
+@import './cart.css';
+@import './modal.css';
+@import './toast.css';
+@import './footer.css';
+
+/* 4 ── Auth flows */
+@import './auth.css';
+@import './auth-extras.css';
+
+/* 5 ── Admin panel */
+@import './admin.css';
+
+/* 6 ── Shared decorators */
+@import './badges.css';
+
+/* 7 ── Responsive overrides — always last */
+@import './responsive.css';
