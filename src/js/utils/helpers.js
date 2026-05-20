@@ -41,3 +41,18 @@ export function ssSet(key, value) {
 export function ssDel(key) {
   try { sessionStorage.removeItem(key); } catch { /* ignore */ }
 }
+
+/**
+ * Format Supabase errors into user-friendly messages, with RLS detection.
+ * Returns a descriptive string safe to show to end users.
+ */
+export function formatSupabaseError(err) {
+  if (!err) return 'Unknown Supabase error';
+  const message = err.message || err.msg || err.error_description || JSON.stringify(err);
+  const lower = String(message).toLowerCase();
+  const isRls = lower.includes('policy') || lower.includes('permission denied') || lower.includes('row-level') || lower.includes('rls') || lower.includes('not authorized');
+  if (isRls) {
+    return `Supabase RLS policy blocked this action. Check permissions and review docs/supabase.md — details: ${message}`;
+  }
+  return message;
+}

@@ -30,7 +30,6 @@ import { openAdminPanel }                  from './admin/index.js';
 import { attachEventListeners }            from './events.js';
 
 // ── Admin (registers window.openAdminPanel etc.) ─────────────
-import { openAdminPanel } from './admin/index.js';
 
 // ─── Make saveAll available to admin modules via window ───────
 window.saveAll = saveAll;
@@ -104,6 +103,9 @@ async function init() {
   const adminPanelOpen = ssGet('mkt_adminPanelOpen');
   if (adminPanelOpen && state.user?.role === 'admin') {
     openAdminPanel();
+    // if a product form draft was open, restore it
+    const pformOpen = ssGet('mkt_admin_pform_open');
+    if (pformOpen) import('./admin/products.js').then(m => m.openProductForm(null));
   }
 
   if (state.selectedProduct) {

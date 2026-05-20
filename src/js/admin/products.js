@@ -15,6 +15,7 @@ import { applyFiltersAndRender,
          renderCategories }                     from '../components/filters.js';
 import { showToast }                            from '../components/ui.js';
 import { loadProducts }                         from '../supabase/products-api.js';
+import { ssGet, ssSet, ssDel }                  from '../utils/helpers.js';
 
 // ─── Table render ─────────────────────────────────────────────
 export function renderAdminProducts() {
@@ -164,15 +165,18 @@ export function openProductForm(editId = null) {
     .map(b => `<option value="${b}" ${(p?.badge || '') === b ? 'selected' : ''}>${b || '—'}</option>`)
     .join('');
 
+  // If there's a saved draft in session (and we're creating new), restore it
+  const draft = !editId && ssGet('mkt_admin_pform');
+
   document.getElementById('pformBody').innerHTML = `
   <div class="pform-grid">
     <div class="form-group" style="grid-column:1/-1">
       <label>Назва *</label>
-      <input id="pf_name" type="text" value="${p?.name || ''}" placeholder="Назва товару">
+      <input id="pf_name" type="text" value="${draft?.name ?? p?.name ?? ''}" placeholder="Назва товару">
     </div>
     <div class="form-group">
       <label>Бренд *</label>
-      <input id="pf_brand" type="text" value="${p?.brand || ''}" placeholder="Apple, Samsung…">
+      <input id="pf_brand" type="text" value="${draft?.brand ?? p?.brand ?? ''}" placeholder="Apple, Samsung…">
     </div>
     <div class="form-group">
       <label>Категорія</label>
@@ -180,23 +184,23 @@ export function openProductForm(editId = null) {
     </div>
     <div class="form-group">
       <label>Ціна (₴) *</label>
-      <input id="pf_price" type="number" value="${p?.price || ''}" min="0">
+      <input id="pf_price" type="number" value="${draft?.price ?? p?.price ?? ''}" min="0">
     </div>
     <div class="form-group">
       <label>Стара ціна (₴)</label>
-      <input id="pf_oldprice" type="number" value="${p?.oldPrice || ''}" min="0">
+      <input id="pf_oldprice" type="number" value="${draft?.oldPrice ?? p?.oldPrice ?? ''}" min="0">
     </div>
     <div class="form-group">
       <label>Знижка (%)</label>
-      <input id="pf_discount" type="number" value="${p?.discount || 0}" min="0" max="99">
+      <input id="pf_discount" type="number" value="${draft?.discount ?? p?.discount ?? 0}" min="0" max="99">
     </div>
     <div class="form-group">
       <label>Рейтинг (1–5)</label>
-      <input id="pf_rating" type="number" value="${p?.rating || 4.5}" min="1" max="5" step="0.1">
+      <input id="pf_rating" type="number" value="${draft?.rating ?? p?.rating ?? 4.5}" min="1" max="5" step="0.1">
     </div>
     <div class="form-group">
       <label>Відгуків</label>
-      <input id="pf_reviews" type="number" value="${p?.reviews || 0}" min="0">
+      <input id="pf_reviews" type="number" value="${draft?.reviews ?? p?.reviews ?? 0}" min="0">
     </div>
     <div class="form-group">
       <label>Бейдж</label>
@@ -204,7 +208,7 @@ export function openProductForm(editId = null) {
     </div>
     <div class="form-group" style="grid-column:1/-1">
       <label>URL фото *</label>
-      <input id="pf_image" type="text" value="${p?.image || ''}" placeholder="https://…">
+      <input id="pf_image" type="text" value="${draft?.image ?? p?.image ?? ''}" placeholder="https://…">
       <div id="pf_img_preview" style="margin-top:8px">
         ${p?.image
           ? `<img src="${p.image}"
@@ -215,11 +219,11 @@ export function openProductForm(editId = null) {
     </div>
     <div class="form-group" style="grid-column:1/-1">
       <label>Опис</label>
-      <textarea id="pf_desc" rows="3">${p?.description || ''}</textarea>
+      <textarea id="pf_desc" rows="3">${draft?.description ?? p?.description ?? ''}</textarea>
     </div>
     <div class="form-group">
       <label class="checkbox-label">
-        <input type="checkbox" id="pf_instock" ${p?.inStock !== false ? 'checked' : ''}>
+        <input type="checkbox" id="pf_instock" ${((draft?.inStock ?? p?.inStock) !== false) ? 'checked' : ''}>
         <span class="checkmark"></span>В наявності
       </label>
     </div>
@@ -243,6 +247,36 @@ export function openProductForm(editId = null) {
     }
   });
 
+  // Persist draft to sessionStorage on input/change
+  const saveDraft = () => {
+    const draftData = {
+      name:   document.getElementById('pf_name')?.value || '',
+      brand:  document.getElementById('pf_brand')?.value || '',
+      category: document.getElementById('pf_cat')?.value || '',
+      price:  document.getElementById('pf_price')?.value || '',
+      oldPrice: document.getElementById('pf_oldprice')?.value || '',
+      discount: document.getElementById('pf_discount')?.value || 0,
+      rating: document.getElementById('pf_rating')?.value || 4.5,
+      reviews: document.getElementById('pf_reviews')?.value || 0,
+      badge:  document.getElementById('pf_badge')?.value || '',
+      image:  document.getElementById('pf_image')?.value || '',
+      description: document.getElementById('pf_desc')?.value || '',
+      inStock: document.getElementById('pf_instock')?.checked || false,
+    };
+    ssSet('mkt_admin_pform', draftData);
+    ssSet('mkt_admin_pform_open', true);
+  };
+
+  ['pf_name','pf_brand','pf_cat','pf_price','pf_oldprice','pf_discount','pf_rating','pf_reviews','pf_badge','pf_image','pf_desc','pf_instock']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener(el.tagName === 'INPUT' && el.type === 'checkbox' ? 'change' : 'input', saveDraft);
+    });
+
+  // mark form open in session
+  ssSet('mkt_admin_pform_open', true);
+
   document.getElementById('pformModal')?.classList.add('open');
   document.getElementById('pformBackdrop')?.classList.add('active');
 }
@@ -251,6 +285,9 @@ window.openProductForm = openProductForm;
 export function closePform() {
   document.getElementById('pformModal')?.classList.remove('open');
   document.getElementById('pformBackdrop')?.classList.remove('active');
+  // clear draft when closing explicitly
+  ssDel('mkt_admin_pform');
+  ssDel('mkt_admin_pform_open');
 }
 window.closePform = closePform;
 

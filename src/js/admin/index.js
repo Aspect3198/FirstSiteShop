@@ -12,6 +12,7 @@ import { renderAdminOrders }     from './orders.js';
 import { renderAdminUsers }      from './users.js';
 import { renderAdminAnalytics }  from './analytics.js';
 import { renderAdminSettings }   from './settings.js';
+import { renderAdminContacts, mountAdminContacts } from './contacts.js';
 
 export function openAdminPanel() {
   if (!state.user || state.user.role !== 'admin') {
@@ -44,6 +45,7 @@ export function renderAdminSection(section) {
 
   const TITLES = {
     dashboard:  'Дашборд',
+    contacts:   'Контакти',
     products:   'Товари',
     orders:     'Замовлення',
     users:      'Користувачі',
@@ -60,6 +62,7 @@ export function renderAdminSection(section) {
 
   switch (section) {
     case 'dashboard': content.innerHTML = renderAdminDashboard();  break;
+    case 'contacts':  content.innerHTML = renderAdminContacts(); mountAdminContacts(); break;
     case 'products':  content.innerHTML = renderAdminProducts();   break;
     case 'orders':    content.innerHTML = renderAdminOrders();     break;
     case 'users':     content.innerHTML = renderAdminUsers();      break;
