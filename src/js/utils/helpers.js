@@ -28,3 +28,16 @@ export function lsSet(key, value) {
 export function lsDel(key) {
   try { localStorage.removeItem(key); } catch { /* ignore */ }
 }
+
+// ─── sessionStorage helpers ───────────────────────────────────
+export function ssGet(key) {
+  try { return JSON.parse(sessionStorage.getItem(key)); } catch { return null; }
+}
+
+export function ssSet(key, value) {
+  try { sessionStorage.setItem(key, JSON.stringify(value)); } catch { /* quota */ }
+}
+
+export function ssDel(key) {
+  try { sessionStorage.removeItem(key); } catch { /* ignore */ }
+}

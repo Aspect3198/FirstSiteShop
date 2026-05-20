@@ -2,6 +2,7 @@
 // admin/index.js — Admin panel open/close and section router
 // =============================================================
 import { state }   from '../state/state.js';
+import { ssDel, ssSet } from '../utils/helpers.js';
 import { updateAdminOrdersBadge } from '../components/ui.js';
 
 // Lazy imports – each section module is small
@@ -20,7 +21,8 @@ export function openAdminPanel() {
   document.getElementById('adminPanel')?.classList.add('open');
   document.getElementById('adminOverlay')?.classList.add('active');
   document.body.style.overflow = 'hidden';
-  renderAdminSection('dashboard');
+  ssSet('mkt_adminPanelOpen', true);
+  renderAdminSection(state.adminSection || 'dashboard');
 }
 window.openAdminPanel = openAdminPanel;
 
@@ -28,12 +30,14 @@ export function closeAdminPanel() {
   document.getElementById('adminPanel')?.classList.remove('open');
   document.getElementById('adminOverlay')?.classList.remove('active');
   document.body.style.overflow = '';
+  ssDel('mkt_adminPanelOpen');
 }
 window.closeAdminPanel = closeAdminPanel;
 
 export function renderAdminSection(section) {
   if (!state.user || state.user.role !== 'admin') return;
   state.adminSection = section;
+  ssSet('mkt_adminSection', section);
 
   document.querySelectorAll('.admin-nav-btn')
     .forEach(b => b.classList.toggle('active', b.dataset.section === section));

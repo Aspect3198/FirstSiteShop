@@ -52,18 +52,21 @@ export function attachEventListeners() {
   document.getElementById('sortSelect')?.addEventListener('change', e => {
     state.sortBy = e.target.value;
     applyFiltersAndRender();
+    window.saveAll?.();
   });
   document.getElementById('gridViewBtn')?.addEventListener('click', () => {
     state.viewMode = 'grid';
     document.getElementById('gridViewBtn')?.classList.add('active');
     document.getElementById('listViewBtn')?.classList.remove('active');
     import('./components/products.js').then(m => m.renderProductGrid());
+    window.saveAll?.();
   });
   document.getElementById('listViewBtn')?.addEventListener('click', () => {
     state.viewMode = 'list';
     document.getElementById('listViewBtn')?.classList.add('active');
     document.getElementById('gridViewBtn')?.classList.remove('active');
     import('./components/products.js').then(m => m.renderProductGrid());
+    window.saveAll?.();
   });
 
   // ── Cart ────────────────────────────────────────────────────
@@ -203,6 +206,9 @@ export function attachEventListeners() {
     state.filters.discountOnly = document.getElementById('discountOnly')?.checked || false;
 
     applyFiltersAndRender();
+
+    // Persist applied filters so they survive F5
+    window.saveAll?.();
 
     if (window.innerWidth < 960) {
       document.getElementById('sidebar')?.classList.remove('open');

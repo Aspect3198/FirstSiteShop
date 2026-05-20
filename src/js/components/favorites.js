@@ -2,7 +2,7 @@
 // components/favorites.js — Wishlist toggle & favourites view
 // =============================================================
 import { state }              from '../state/state.js';
-import { trunc }              from '../utils/helpers.js';
+import { trunc, ssSet }       from '../utils/helpers.js';
 import { saveAll }            from '../utils/storage.js';
 import { showToast, updateCountBadges } from './ui.js';
 import { renderCard }         from './products.js';
@@ -35,6 +35,10 @@ export function toggleFavorite(productId) {
 window.toggleFavorite = toggleFavorite;
 
 export function openFavoritesView() {
+  state.activeView = 'favorites';
+  ssSet('mkt_activeView', state.activeView);
+  saveAll();
+
   state.filtered = state.allProducts.filter(p => state.favorites.includes(p.id));
   const grid     = document.getElementById('productGrid');
   const empty    = document.getElementById('emptyState');

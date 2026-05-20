@@ -2,6 +2,7 @@
 // components/modal.js — Product detail modal
 // =============================================================
 import { state }       from '../state/state.js';
+import { ssSet, ssDel } from '../utils/helpers.js';
 import { renderStars } from './products.js';
 
 export function openProductModal(productId) {
@@ -12,82 +13,104 @@ export function openProductModal(productId) {
   const isFav  = state.favorites.includes(productId);
   const saved  = p.oldPrice ? p.oldPrice - p.price : 0;
   const specs  = p.specs || {};
+  const galleryImages = [p.image]
+    .concat(Array.isArray(p.images) ? p.images.filter(src => src && src !== p.image) : [])
+    .slice(0, 2);
+  const mainImage = galleryImages[0] || p.image;
 
-  document.getElementById('modalBody').innerHTML = `
-    <div class="modal-gallery">
-      <img class="modal-main-img" id="modalMainImg"
-           src="${p.image}" alt="${p.name}"
-           onerror="this.src='https://picsum.photos/seed/${p.id}/800/600'">
-      ${p.images?.length > 1 ? `
-        <div class="modal-thumbs">
-          ${p.images.map((img, i) => `
-            <img class="modal-thumb ${i === 0 ? 'active' : ''}"
-                 src="${img}" alt="${p.name}"
-                 onclick="switchModalImg('${img}', this)">`).join('')}
-        </div>` : ''}
-    </div>
+  const detailPanel = document.getElementById('productDetailPanel');
+  const detailBody  = document.getElementById('productDetailContent');
+  if (!detailBody || !detailPanel) return;
 
-    <div class="modal-info">
-      <p class="modal-brand">${p.brand}</p>
-      <h2 class="modal-title">${p.name}</h2>
+  state.selectedProduct = productId;
+  ssSet('mkt_selectedProduct', productId);
 
-      <div class="modal-rating">
-        <div class="stars">${renderStars(p.rating)}</div>
-        <span class="modal-review-count">${(p.reviews || 0).toLocaleString('uk')} відгуків</span>
-        ${p.inStock
-          ? '<span style="color:var(--accent);font-size:12px;font-weight:700">✓ В наявності</span>'
-          : '<span style="color:#ff4d4d;font-size:12px;font-weight:700">✗ Немає</span>'}
+  detailBody.innerHTML = `
+    <div class="detail-main">
+      <div class="detail-image-panel">
+        <div class="detail-image-frame">
+          <img id="detailMainImg" src="${mainImage}" alt="${p.name}"
+               onerror="this.src='https://picsum.photos/seed/${p.id}/800/600'">
+        </div>
+        ${galleryImages.length > 1 ? `
+          <div class="detail-thumb-row">
+            ${galleryImages.map((src, idx) => `
+              <button type="button" class="detail-thumb-btn ${idx === 0 ? 'active' : ''}"
+                      onclick="switchDetailImage('${src}', this)">
+                <img src="${src}" alt="${p.name}">
+              </button>`).join('')}
+          </div>` : ''}
       </div>
 
-      <div class="modal-price-wrap">
-        <span class="modal-price">${p.price.toLocaleString('uk')} ₴</span>
-        ${p.oldPrice ? `<span class="modal-old-price">${p.oldPrice.toLocaleString('uk')} ₴</span>` : ''}
-      </div>
-      ${saved > 0 ? `<p class="modal-save">Ви економите ${saved.toLocaleString('uk')} ₴ (${p.discount}%)</p>` : ''}
+      <div class="detail-info">
+        <p class="detail-brand">${p.brand}</p>
+        <h2 class="detail-title">${p.name}</h2>
 
-      <p class="modal-desc">${p.description || ''}</p>
+        <div class="detail-rating">
+          <div class="stars">${renderStars(p.rating)}</div>
+          <span class="detail-review-count">${(p.reviews || 0).toLocaleString('uk')} відгуків</span>
+        </div>
 
-      ${Object.keys(specs).length ? `
-        <div class="modal-specs">
-          <h4>Характеристики</h4>
-          ${Object.entries(specs).map(([k, v]) => `
-            <div class="spec-row">
-              <span class="spec-key">${k}</span>
-              <span class="spec-val">${v}</span>
-            </div>`).join('')}
-        </div>` : ''}
+        <div class="detail-price-row">
+          <div>
+            <span class="detail-price">${p.price.toLocaleString('uk')} ₴</span>
+            ${p.oldPrice ? `<span class="detail-old-price">${p.oldPrice.toLocaleString('uk')} ₴</span>` : ''}
+          </div>
+          ${saved > 0 ? `<p class="detail-save">Економія ${saved.toLocaleString('uk')} ₴ (${p.discount}%)</p>` : ''}
+        </div>
 
-      <div class="modal-actions">
-        <button class="modal-cart-btn ${inCart ? 'in-cart' : ''}"
-                onclick="addToCart(${productId});closeModal()">
-          ${inCart ? '✓ В кошику' : '🛒 Додати до кошика'}
-        </button>
-        <button class="modal-wish-btn ${isFav ? 'active' : ''}"
-                onclick="toggleFavorite(${productId});this.classList.toggle('active')">
-          <svg width="20" height="20" viewBox="0 0 24 24"
-               fill="${isFav ? 'currentColor' : 'none'}"
-               stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
-                     a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
-                     1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-        </button>
+        <p class="detail-desc">${p.description || ''}</p>
+
+        ${Object.keys(specs).length ? `
+          <div class="detail-specs">
+            <h4>Характеристики</h4>
+            ${Object.entries(specs).map(([k, v]) => `
+              <div class="spec-row">
+                <span class="spec-key">${k}</span>
+                <span class="spec-val">${v}</span>
+              </div>`).join('')}
+          </div>` : ''}
+
+        <div class="detail-actions">
+          <button class="detail-cart-btn ${inCart ? 'in-cart' : ''}"
+                  onclick="addToCart(${productId});closeModal()">
+            ${inCart ? '✓ В кошику' : '🛒 Додати до кошика'}
+          </button>
+          <button class="detail-wish-btn ${isFav ? 'active' : ''}"
+                  onclick="toggleFavorite(${productId});this.classList.toggle('active')">
+            <svg width="20" height="20" viewBox="0 0 24 24"
+                 fill="${isFav ? 'currentColor' : 'none'}"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06
+                       a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78
+                       1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>`;
 
-  document.getElementById('productModal')?.classList.add('active');
-  document.getElementById('modalBackdrop')?.classList.add('active');
-  document.body.style.overflow = 'hidden';
+  detailPanel.classList.remove('hidden');
+  detailPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 window.openProductModal = openProductModal;
 
 export function closeModal() {
-  document.getElementById('productModal')?.classList.remove('active');
-  document.getElementById('modalBackdrop')?.classList.remove('active');
-  document.body.style.overflow = '';
+  const detailPanel = document.getElementById('productDetailPanel');
+  if (detailPanel) detailPanel.classList.add('hidden');
+  state.selectedProduct = null;
+  ssDel('mkt_selectedProduct');
 }
 window.closeModal = closeModal;
+
+export function switchDetailImage(src, btn) {
+  const img = document.getElementById('detailMainImg');
+  if (img) img.src = src;
+  document.querySelectorAll('.detail-thumb-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+window.switchDetailImage = switchDetailImage;
 
 export function switchModalImg(src, thumbEl) {
   const img = document.getElementById('modalMainImg');

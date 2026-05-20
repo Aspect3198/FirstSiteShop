@@ -6,6 +6,7 @@ import { ORDER_STATUS_MAP }      from '../utils/constants.js';
 import { trunc }                 from '../utils/helpers.js';
 import { showToast }             from '../components/ui.js';
 import { adminStatusBadge }      from './dashboard.js';
+import { deleteOrder as supabaseDeleteOrder } from '../supabase/orders-api.js';
 
 export function renderAdminOrders() {
   const orders   = getOrders();
@@ -58,9 +59,33 @@ export function adminOrderRows(orders) {
             `<option value="${k}" ${o.status === k ? 'selected' : ''}>${v.label}</option>`
           ).join('')}
         </select>
+        <button class="adm-delete-btn" title="Видалити" onclick="adminDeleteOrder('${o.id}', this)">🗑</button>
       </td>
     </tr>`).join('');
 }
+
+export async function adminDeleteOrder(orderId, btnEl) {
+  if (!confirm('Видалити це замовлення? Ця дія незворотна.')) return;
+  const orders = getOrders();
+  const idx = orders.findIndex(x => x.id === orderId);
+  if (idx === -1) { showToast('Помилка', 'Замовлення не знайдено', 'error'); return; }
+
+  // Optimistically remove locally and update UI
+  orders.splice(idx, 1);
+  saveOrders(orders);
+  showToast('Видалено', `Замовлення ${orderId.slice(-8)} видалено`, 'success');
+  window.updateAdminOrdersBadge?.();
+  window.renderAdminSection?.('orders');
+
+  // Also attempt to delete in Supabase (best-effort)
+  try {
+    const { error } = await supabaseDeleteOrder(orderId);
+    if (error) showToast('Supabase error', error.message || 'Не вдалося видалити на сервері', 'warning');
+  } catch (err) {
+    console.error('supabase delete failed', err);
+  }
+}
+window.adminDeleteOrder = adminDeleteOrder;
 
 export function adminFilterOrders(status, btn) {
   document.querySelectorAll('.adm-filter-tab').forEach(b => b.classList.remove('active'));

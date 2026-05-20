@@ -9,8 +9,7 @@ import '../css/main.css';
 // ── Core ─────────────────────────────────────────────────────
 import { state }                from './state/state.js';
 import { SITE_NAME }            from './utils/constants.js';
-import { loadFromStorage, saveAll } from './utils/storage.js';
-
+import { loadFromStorage, saveAll } from './utils/storage.js';import { ssGet }                from './utils/helpers.js';
 // ── Supabase data layer ───────────────────────────────────────
 import { loadProducts }         from './supabase/products-api.js';
 
@@ -20,16 +19,18 @@ import { showLoadError, updateCountBadges,
 import { renderCategories, renderMegaMenu,
          renderBrandFilter, renderRatingFilters,
          applyFiltersAndRender }           from './components/filters.js';
-import { initPriceRange }                  from './components/price-range.js';
+import { initPriceRange, updateRangeFill } from './components/price-range.js';
+import { openProductModal }                from './components/modal.js';
 import { initSlider }                      from './components/slider.js';
 import { updateAuthUI }                    from './components/auth.js';
 import { renderCartUI }                    from './components/cart.js';
-
+import { openFavoritesView }               from './components/favorites.js';
+import { openAdminPanel }                  from './admin/index.js';
 // ── Events ────────────────────────────────────────────────────
 import { attachEventListeners }            from './events.js';
 
 // ── Admin (registers window.openAdminPanel etc.) ─────────────
-import './admin/index.js';
+import { openAdminPanel } from './admin/index.js';
 
 // ─── Make saveAll available to admin modules via window ───────
 window.saveAll = saveAll;
@@ -45,6 +46,28 @@ async function init() {
 
   // 2. Wire all DOM event listeners
   attachEventListeners();
+
+  // Apply persisted UI state to DOM (lightweight)
+  const sortEl = document.getElementById('sortSelect');
+  if (sortEl) sortEl.value = state.sortBy || sortEl.value;
+  const gridBtn = document.getElementById('gridViewBtn');
+  const listBtn = document.getElementById('listViewBtn');
+  if (gridBtn && listBtn) {
+    gridBtn.classList.toggle('active', state.viewMode === 'grid');
+    listBtn.classList.toggle('active', state.viewMode === 'list');
+  }
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.value = state.searchQuery || '';
+  // restore price inputs
+  const pMin = document.getElementById('priceMin');
+  const pMax = document.getElementById('priceMax');
+  const rMin = document.getElementById('rangeMin');
+  const rMax = document.getElementById('rangeMax');
+  if (pMin) pMin.value = state.filters.priceMin;
+  if (pMax) pMax.value = state.filters.priceMax;
+  if (rMin) rMin.value = state.filters.priceMin;
+  if (rMax) rMax.value = state.filters.priceMax;
+  updateRangeFill();
 
   // 3. Setup product-independent UI
   initSlider();
@@ -69,6 +92,23 @@ async function init() {
   applyFiltersAndRender();
   initPriceRange();
   renderCartUI();
+
+  const navigationEntries = performance.getEntriesByType?.('navigation') || [];
+  const navType = navigationEntries[0]?.type || window.performance?.navigation?.type;
+  const isReload = navType === 'reload' || navType === 1;
+
+  if (isReload && state.activeView === 'favorites') {
+    openFavoritesView();
+  }
+
+  const adminPanelOpen = ssGet('mkt_adminPanelOpen');
+  if (adminPanelOpen && state.user?.role === 'admin') {
+    openAdminPanel();
+  }
+
+  if (state.selectedProduct) {
+    openProductModal(state.selectedProduct);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);

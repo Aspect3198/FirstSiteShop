@@ -185,7 +185,16 @@ export function renderActiveFilterTags() {
     });
   }
 
-  el.innerHTML = tags.map(t =>
-    `<span class="filter-tag">${t.label}<button onclick="(${t.clear.toString()})()">✕</button></span>`,
+  el.innerHTML = tags.map((t, idx) =>
+    `<span class="filter-tag">${t.label}<button class="filter-tag-close" data-tag-index="${idx}">✕</button></span>`,
   ).join('');
+
+  el.querySelectorAll('.filter-tag-close').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const idx = Number(btn.dataset.tagIndex);
+      if (Number.isInteger(idx) && tags[idx]) tags[idx].clear();
+    });
+  });
 }

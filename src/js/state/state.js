@@ -25,8 +25,11 @@ export const state = {
   viewMode: 'grid',
   page:     1,
   perPage:  12,
+  activeView: 'catalog',
 
   sliderIndex: 0,
   sliderTimer: null,
   adminSection: 'dashboard',
+  // persisted UI / selection
+  selectedProduct: null,
 };

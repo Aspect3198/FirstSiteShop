@@ -2,7 +2,7 @@
 // components/orders.js — "My Orders" modal for logged-in users
 // =============================================================
 import { state }             from '../state/state.js';
-import { getOrders }         from '../utils/storage.js';
+import { getOrders, saveOrders } from '../utils/storage.js';
 import { ORDER_STATUS_MAP }  from '../utils/constants.js';
 import { showToast }         from './ui.js';
 import { openAuthModal }     from './auth.js';
@@ -50,6 +50,7 @@ export function openMyOrders() {
         <div class="order-card-foot">
           <span>${o.items.reduce((a, i) => a + i.qty, 0)} товарів</span>
           <strong>${o.total.toLocaleString('uk')} ₴</strong>
+          <button class="btn-ghost" style="margin-left:12px" onclick="deleteMyOrder('${o.id}', this)">🗑 Видалити</button>
         </div>
       </div>`).join('');
   }
@@ -59,6 +60,31 @@ export function openMyOrders() {
   document.body.style.overflow = 'hidden';
 }
 window.openMyOrders = openMyOrders;
+
+export async function deleteMyOrder(orderId, btn) {
+  if (!state.user) { showToast('Потрібен вхід', '', 'warning'); return; }
+  const orders = getOrders();
+  const idx = orders.findIndex(o => o.id === orderId && o.userId === state.user.id);
+  if (idx === -1) { showToast('Помилка', 'Замовлення не знайдено', 'error'); return; }
+  if (!confirm('Ви дійсно хочете видалити своє замовлення?')) return;
+
+  // remove locally
+  orders.splice(idx, 1);
+  saveOrders(orders);
+  showToast('Видалено', 'Ваше замовлення видалено', 'success');
+  // update UI
+  openMyOrders();
+
+  // best-effort server delete (no rollback on failure)
+  try {
+    const { deleteOrder } = await import('../supabase/orders-api.js');
+    const { error } = await deleteOrder(orderId);
+    if (error) showToast('Серверна помилка', 'Не вдалося видалити замовлення на сервері', 'warning');
+  } catch (err) {
+    console.error('deleteMyOrder supabase failed', err);
+  }
+}
+window.deleteMyOrder = deleteMyOrder;
 
 export function closeMyOrders() {
   document.getElementById('ordersModal')?.classList.remove('open');

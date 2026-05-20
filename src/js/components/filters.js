@@ -8,6 +8,8 @@ import {
   renderResultsInfo,
   renderActiveFilterTags,
 } from './products.js';
+import { saveAll } from '../utils/storage.js';
+import { ssSet } from '../utils/helpers.js';
 
 // ─── Category sidebar ────────────────────────────────────────
 export function renderCategories() {
@@ -119,6 +121,7 @@ export function applyFiltersAndRender() {
   renderResultsInfo();
   renderActiveFilterTags();
   renderCategories();
+  saveAll();
 }
 window.applyFiltersAndRender = applyFiltersAndRender;
 
@@ -138,6 +141,8 @@ export function sortProducts(list) {
 export function filterByCategory(catId) {
   state.currentCategory = catId;
   state.searchQuery     = '';
+  state.activeView      = 'catalog';
+  ssSet('mkt_activeView', state.activeView);
   const inp = document.getElementById('searchInput');
   if (inp) inp.value = '';
   applyFiltersAndRender();
@@ -179,6 +184,8 @@ export function resetAll() {
   renderRatingFilters();
   window.updateRangeFill?.();
   applyFiltersAndRender();
+  // persist cleared filters
+  window.saveAll?.();
 }
 window.resetAll = resetAll;
 

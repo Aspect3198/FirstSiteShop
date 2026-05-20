@@ -15,6 +15,150 @@
   border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
   overflow: hidden; opacity: 0; pointer-events: none; transition: opacity var(--tr), transform var(--tr);
 }
+
+.product-detail-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+.product-detail-panel.hidden { display: none; }
+.product-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.product-detail-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+.btn-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.detail-main {
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: start;
+  width: 100%;
+}
+.detail-image-panel {
+  display: grid;
+  gap: 18px;
+}
+.detail-image-frame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+  padding: 18px;
+}
+.detail-image-frame img {
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+}
+.detail-thumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.detail-thumb-btn {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  width: 82px;
+  height: 82px;
+  padding: 0;
+  background: #fff;
+  cursor: pointer;
+  transition: var(--tr);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-thumb-btn.active,
+.detail-thumb-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(0, 199, 60, .12);
+}
+.detail-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.detail-brand { color: var(--accent); text-transform: uppercase; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; }
+.detail-title { font-size: 22px; font-weight: 900; line-height: 1.2; margin: 0; }
+.detail-rating { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.detail-review-count { color: var(--text3); font-size: 13px; }
+.detail-price-row { display: flex; flex-direction: column; gap: 8px; }
+.detail-price { font-size: 28px; font-weight: 800; color: var(--accent); }
+.detail-old-price { font-size: 14px; color: var(--text-muted); text-decoration: line-through; }
+.detail-save { font-size: 13px; color: var(--accent); font-weight: 700; }
+.detail-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.detail-specs { padding: 14px; background: var(--bg3); border-radius: var(--radius-sm); }
+.detail-specs h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--text3); margin: 0 0 10px; }
+.detail-specs .spec-row { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: auto;
+}
+.detail-cart-btn, .detail-wish-btn {
+  min-height: 46px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  transition: var(--tr);
+}
+.detail-cart-btn {
+  flex: 0 1 260px;
+  min-width: 200px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+}
+.detail-cart-btn:hover { background: var(--accent-hover); }
+.detail-wish-btn {
+  width: 46px;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-wish-btn.active, .detail-wish-btn:hover { border-color: #ff4d6a; color: #ff4d6a; background: #fff5f7; }
 .product-modal.active { opacity: 1; pointer-events: all; transform: translate(-50%, -50%) scale(1); }
 .modal-close-btn { position: absolute; top: 14px; right: 14px; z-index: 10; }
 .modal-body { display: grid; grid-template-columns: 1fr 1fr; overflow-y: auto; max-height: 88vh; }

@@ -23,8 +23,11 @@ export function updateRangeFill() {
   const mn  = +rMin.value;
   const mx  = +rMax.value;
   const max = +rMax.max || 100000;
-  fill.style.left  = (mn / max * 100) + '%';
-  fill.style.width = ((mx - mn) / max * 100) + '%';
+  // Clamp values to avoid overflow and ensure responsive behavior
+  const leftPct = Math.max(0, Math.min(100, (mn / max * 100)));
+  const widthPct = Math.max(0, Math.min(100, ((mx - mn) / max * 100)));
+  fill.style.left  = leftPct + '%';
+  fill.style.width = widthPct + '%';
 
   const pMin = document.getElementById('priceMin');
   const pMax = document.getElementById('priceMax');
