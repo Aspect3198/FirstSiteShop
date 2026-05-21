@@ -129,6 +129,17 @@ npm run build
 npm run preview
 ```
 
+### Environment Variables
+
+Create a local environment file using `.env.local` and set your Supabase credentials:
+
+```bash
+VITE_SUPABASE_URL=https://your-project-id.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key
+```
+
+A template is available in `.env.example`.
+
 ---
 
 ## 🗄 Supabase Setup
@@ -174,15 +185,17 @@ create policy "Admin full access" on products
 
 ### 3. Configure the client
 
-Edit `src/js/supabase/client.js`:
+The project now reads Supabase config from environment variables in `.env.local`.
 
-```js
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_KEY = 'YOUR_ANON_KEY';
+```env
+VITE_SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+VITE_SUPABASE_ANON_KEY=YOUR_ANON_KEY
 ```
 
+If you prefer, copy `.env.example` to `.env.local` and fill in your values.
+
 > **Never commit real keys to public repos.**  
-> Use a `.env` file and `import.meta.env.VITE_SUPABASE_URL` for production.
+> Set your secrets in `.env.local` and add the same variables in your hosting dashboard.
 
 ---
 
@@ -198,6 +211,29 @@ Authentication is **UI-only** — credentials are stored in `localStorage`.
 To register as **Admin**, tick the Admin role and enter the secret code:
 ```
 MARKET2024
+```
+
+---
+
+## 🚀 Deployment
+
+### How to deploy
+
+```bash
+npm install
+npm run build
+npm run preview
+```
+
+### Environment variables
+
+Your hosting provider must define the following variables:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+
+These values should be configured in Netlify/Vercel/Cloudflare Pages/GitHub Pages environment settings, not committed to source control.
+
 ```
 
 > In a production app replace this with Supabase Auth (`supabase.auth.*`).

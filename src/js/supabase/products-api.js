@@ -2,7 +2,7 @@
 // supabase/products-api.js — All Supabase CRUD for "products"
 // Pure data layer: no UI calls, no state mutations here.
 // =============================================================
-import { db }    from './client.js';
+import { db, isSupabaseConfigured }    from './client.js';
 import { state } from '../state/state.js';
 
 // ─── Normalisation ───────────────────────────────────────────
@@ -39,6 +39,16 @@ export function normalizeProduct(row) {
  */
 export async function loadProducts() {
   console.log('[WONDERMARKET] Fetching products from Supabase…');
+
+  if (!isSupabaseConfigured) {
+    console.warn('[WONDERMARKET] Supabase not configured — loading local sample products');
+    const resp = await fetch('/src/js/supabase/sample-products.json');
+    if (!resp.ok) throw new Error('Local sample products not found');
+    const data = await resp.json();
+    state.allProducts = data.map(normalizeProduct);
+    console.log(`[WONDERMARKET] ✅ Loaded ${state.allProducts.length} local sample products`);
+    return;
+  }
 
   const { data, error } = await db
     .from('products')

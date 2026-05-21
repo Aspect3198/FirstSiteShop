@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { fileURLToPath } from 'node:url';
 
 export default defineConfig({
   // index.html is at the project root — Vite default, no change needed
@@ -12,11 +13,13 @@ export default defineConfig({
 
   // Production build
   build: {
-    outDir:     'dist',
+    outDir: 'dist',
     emptyOutDir: true,
-    sourcemap:  false,
+    sourcemap: false,
     rollupOptions: {
-      // Single entry — Vite picks it up from index.html automatically
+      input: {
+        index: fileURLToPath(new URL('./Index.html', import.meta.url)),
+      },
     },
   },
 

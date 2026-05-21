@@ -1,0 +1,18 @@
+[
+  {
+    "id": "local-1",
+    "title": "Тестовий товар",
+    "price": 1999,
+    "rating": 4.5,
+    "old_price": null,
+    "in_stock": true,
+    "brand": "Локальний",
+    "discount": 0,
+    "reviews": 3,
+    "popular": 10,
+    "description": "Це локальна заглушка для товарів, коли Supabase не налаштовано.",
+    "images": [],
+    "tags": ["тест"],
+    "specs": {}
+  }
+]
